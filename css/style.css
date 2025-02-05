@@ -1,0 +1,100 @@
+* {
+  box-sizing: border-box;
+}
+
+body,
+main {
+  font-family: "Montserrat", "DM Sans", system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+    "Open Sans", "Helvetica Neue", sans-serif;
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+/* Login Button Hover Effect - FIXED */
+.login-button {
+  position: relative;
+  background: white;
+  color: black;
+  transition: all 0.3s ease-in-out;
+}
+
+.login-button:hover {
+  background-image: linear-gradient(white, white),
+    linear-gradient(135deg, #ac1889, #feda11, #31dfd1);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+/* Sign Up Button Hover Effect */
+.signup-button:hover {
+  background-color: #0e5883;
+  border: 3px solid #8dc0e9;
+  color: white;
+}
+
+/* Pair BTN effect */
+.button {
+  padding: 0.8rem 2rem;
+  border-radius: 0.5rem;
+  background-color: #581448;
+  color: #f5f5f5;
+  border: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.button1 {
+  box-shadow: 4px 4px 10px rgba(94, 247, 174, 1);
+}
+
+.button1:hover {
+  box-shadow: 4px 4px 10px rgba(254, 218, 17, 1);
+}
+
+.button2 {
+  box-shadow: 4px 4px 10px rgba(254, 218, 17, 1);
+}
+
+.button2:hover {
+  box-shadow: 4px 4px 10px rgba(94, 247, 174, 1);
+}
+
+/*Hearts effect */
+.heart {
+  position: absolute;
+  opacity: 0;
+  transform: scale(0.8);
+  animation: fadeInUp 0.8s ease-in-out forwards;
+}
+
+.heart1 {
+  width: 70px;
+  top: 50px;
+  right: 290px;
+  animation-delay: 0.5s;
+}
+
+.heart2 {
+  width: 60px;
+  top: 100px;
+  right: 295px;
+  animation-delay: 1s;
+}
+
+.heart3 {
+  width: 55px;
+  top: 140px;
+  right: 280px;
+  animation-delay: 1.5s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
