@@ -8,6 +8,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
       href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap"
       rel="stylesheet"
     />
@@ -121,12 +126,12 @@
             <!-- Buttons -->
             <div class="flex flex-wrap justify-center sm:justify-start gap-4">
               <button
-                class="login-button w-32 sm:w-25 h-8 px-2 rounded border-[4px] border-transparent transition-all duration-300 text-sm sm:text-base"
+                class="login-button lg:w-32 h-8 px-2 rounded border-[4px] border-transparent transition-all duration-300 text-sm sm:text-base"
               >
                 Login
               </button>
               <button
-                class="signup-button bg-[#581448] text-white w-32 sm:w-25 h-8 px-2 rounded border-[2px] border-transparent transition-all duration-300 text-sm sm:text-base"
+                class="signup-button bg-[#581448] text-white lg:w-32 h-8 px-2 rounded border-[2px] border-transparent transition-all duration-300 text-sm sm:text-[14px]"
               >
                 Sign Up
               </button>
@@ -159,11 +164,11 @@
               food and drinks!
             </p>
           </div>
-          <div class="hearts-container relative">
+          <div class="hearts-container relative flex justify-center">
             <img
               src="images/500v3.svg"
               alt="images"
-              class="w-full sm:w-1/2 lg:w-[340px]"
+              class="w-[80%] sm:w-[40%] md:w-[50%] lg:w-[340px] mx-auto max-w-[400px]"
             />
             <img src="images/hearts.svg" alt="heart1" class="heart heart1" />
             <img src="images/hearts.svg" alt="heart2" class="heart heart2" />
@@ -173,7 +178,7 @@
       </section>
       <!-- gradient -->
       <section
-        class="bg-gradient-to-r from-[#0E5883] to-[#4C1D5A] py-10 mt-16 sm:py-16 md:py-20 lg:py-20 flex items-center justify-center w-full rounded-2xl mb-14"
+        class="bg-gradient-to-r from-[#0E5883] to-[#4C1D5A] py-8 mt-20 sm:py-14 md:py-18 lg:py-18 flex items-center justify-center w-full rounded-2xl mb-14"
       >
         <div
           class="text-center text-white px-4 sm:px-8 md:px-12 lg:px-14 max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-4xl"
@@ -181,10 +186,12 @@
           <p class="text-lg sm:text-xl md:text-xl lg:text-2xl font-semibold">
             What would you like to pair?
           </p>
-          <p class="text-lg sm:text-xs md:text-sm lg:text-sm font-regular">
+          <p class="text-sm sm:text-xs md:text-sm lg:text-sm font-regular mt-6">
             Choose between Wine or Beer and find your match
           </p>
-          <div class="flex flex-col sm:flex-row justify-center gap-8 mt-6">
+          <div
+            class="flex flex-col sm:flex-row justify-center gap-6 sm:gap-8 mt-8"
+          >
             <button class="button button1 w-[200px]">WINE</button>
             <button class="button button2 w-[200px]">BEER</button>
           </div>
@@ -239,7 +246,121 @@
         </div>
       </section>
 
-      <!-- Cards -->
+      <!-- Pair Beer -->
+      <section
+        class="bg-[#0E5883] text-white p-6 md:p-12 flex flex-col md:flex-row items-center justify-between max-w-5xl mx-auto rounded-lg mt-16"
+      >
+        <div class="flex-1 text-left space-y-2">
+          <h2 class="h2-hop text-xl md:text-2xl font-bold">
+            Would you like to host a Beer Pairing Party?
+          </h2>
+          <p class="p-hop text-lg">Here you can find the best tips</p>
+        </div>
+        <div class="flex justify-end">
+          <a
+            href=""
+            class="hop-btn text-white font-bold text-md flex gap-3 px-4 py-2 mt-8"
+            ><span>Hop on board!!</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 512 512"
+            >
+              <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+              <path
+                d="M32 64c0-17.7 14.3-32 32-32l288 0c17.7 0 32 14.3 32 32l0 32 51.2 0c42.4 0 76.8 34.4 76.8 76.8l0 102.1c0 30.4-17.9 57.9-45.6 70.2L384 381.7l0 34.3c0 35.3-28.7 64-64 64L96 480c-35.3 0-64-28.7-64-64L32 64zM384 311.6l56.4-25.1c4.6-2.1 7.6-6.6 7.6-11.7l0-102.1c0-7.1-5.7-12.8-12.8-12.8L384 160l0 151.6zM160 144c0-8.8-7.2-16-16-16s-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224zm64 0c0-8.8-7.2-16-16-16s-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224zm64 0c0-8.8-7.2-16-16-16s-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224z"
+              />
+            </svg>
+          </a>
+        </div>
+
+        <div class="flex-1 flex justify-center mt-6 md:mt-0 hover:opacity-60">
+          <img
+            src="images/meritt-thomas-2UsNF4Az-Ko-unsplash.jpg"
+            alt="Beer Pairing"
+            class="custom-shadow w-3/4 md:w-auto max-w-sm"
+          />
+        </div>
+      </section>
     </main>
+
+    <footer class="relative bg-black text-white py-6 mt-20 w-full">
+      <!-- Line-->
+      <div
+        class="absolute -top-1 left-1/2 transform -translate-x-1/2 flex items-center w-full"
+      >
+        <div class="w-full h-1 bg-yellow-400"></div>
+        <button
+          id="openModal"
+          class="bg-yellow-500 text-white px-4 py-2 rounded-lg shadow-lg absolute left-1/2 transform -translate-x-1/2"
+        >
+          Write to us
+        </button>
+      </div>
+
+      <!-- footer content-->
+      <div
+        class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center mt-6"
+      >
+        <div class="text-center md:text-left space-y-2 mb-6 md:mb-0">
+          <a href="#" class="block">About Us</a>
+          <a href="#" class="block">Our Company</a>
+          <a href="#" class="block">FAQ</a>
+        </div>
+
+        <div class="text-center my-4 md:my-0">
+          <img
+            src="images/pair my reduce in black bg.png"
+            alt="PairMyDrink Logo"
+            class="mx-auto w-[220px]"
+          />
+
+          <p class="text-xs mt-2">
+            &copy; 2025 | Designed & Developed by Victoria Sani.
+          </p>
+        </div>
+
+        <div class="text-center md:text-right space-y-2">
+          <a href="#" class="block">Sign up</a>
+          <a href="#" class="block">Log in</a>
+          <a href="#" class="block">Contact</a>
+          <a href="#" class="block text-xs">PRIVACY POLICY</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Modal -->
+    <div
+      id="modal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden"
+    >
+      <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+        <h2 class="text-xl font-bold mb-4">Contact Us</h2>
+        <form>
+          <label class="block text-sm font-medium">Name</label>
+          <input type="text" class="w-full p-2 border rounded mb-4" required />
+
+          <label class="block text-sm font-medium">Email</label>
+          <input type="email" class="w-full p-2 border rounded mb-4" required />
+
+          <label class="block text-sm font-medium">Message</label>
+          <textarea
+            class="w-full p-2 border rounded mb-4"
+            rows="4"
+            required
+          ></textarea>
+
+          <button
+            type="submit"
+            class="bg-yellow-500 text-white px-4 py-2 rounded-lg w-full"
+          >
+            Send
+          </button>
+        </form>
+        <button id="closeModal" class="mt-4 text-red-500">Close</button>
+      </div>
+    </div>
+    <script src="JavaScript/index.js"></script>
   </body>
 </html>
