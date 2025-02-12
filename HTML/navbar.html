@@ -14,8 +14,88 @@
         </a>
       </div>
 
+      <!-- Hamburger Menu Button -->
+      <button id="hamburger-btn" class="lg:hidden focus:outline-none">
+        <svg
+          class="w-8 h-8 text-white"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M4 6h16M4 12h16m-7 6h7"
+          ></path>
+        </svg>
+      </button>
+
+      <!-- Mobile Menu -->
+      <div
+        id="mobile-menu"
+        class="fixed left-0 top-0 w-64 h-full bg-black transform -translate-x-full transition-transform duration-300 lg:hidden"
+      >
+        <button id="close-menu" class="absolute top-4 right-4 text-white">
+          ✕
+        </button>
+        <ul class="flex flex-col mt-12 space-y-6 px-6">
+          <li>
+            <a href="#" class="text-white hover:text-yellow-500">About Us</a>
+          </li>
+          <li>
+            <a href="#" class="text-white hover:text-yellow-500"
+              >Wine Pairing</a
+            >
+            <ul class="mt-2 ml-4 space-y-2">
+              <li>
+                <a href="#" class="text-white hover:text-yellow-500"
+                  >Pair by wine variety</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-white hover:text-yellow-500"
+                  >Pair by food</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  id="open-quiz-mobile"
+                  class="text-white hover:text-yellow-500"
+                  >Take the wine quiz</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#" class="text-white hover:text-yellow-500"
+              >Beer Pairing</a
+            >
+            <ul class="mt-2 ml-4 space-y-2">
+              <li>
+                <a href="#" class="text-white hover:text-yellow-500"
+                  >Pair by beer variety</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-white hover:text-yellow-500"
+                  >Pair by food</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-white hover:text-yellow-500"
+                  >Take the beer quiz</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
       <!-- Navigation Links -->
-      <ul class="navbar flex space-x-6 gap-4">
+      <ul class="navbar hidden lg:flex space-x-6 gap-4 md:hidden">
         <li class="relative group">
           <a
             href="#"

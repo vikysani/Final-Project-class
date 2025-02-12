@@ -6,9 +6,37 @@ fetch("navbar.html")
   .then((data) => {
     document.getElementById("navbar").innerHTML = data;
   })
-  .catch((error) => console.error("Error al cargar el navbar:", error));
+  .catch((error) => console.error("Error loading navbar:", error));
 
-//NAV hanburguesa
+//NAV hamburguesa
+// Create a new file called navbar.js
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Get the necessary elements
+  const hamburgerBtn = document.getElementById("hamburger-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const closeMenu = document.getElementById("close-menu");
+
+  // Toggle menu when hamburger button is clicked
+  hamburgerBtn.addEventListener("click", function () {
+    mobileMenu.classList.toggle("-translate-x-full");
+  });
+
+  // Close menu when close button is clicked
+  closeMenu.addEventListener("click", function () {
+    mobileMenu.classList.add("-translate-x-full");
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener("click", function (event) {
+    const isClickInside =
+      mobileMenu.contains(event.target) || hamburgerBtn.contains(event.target);
+
+    if (!isClickInside && !mobileMenu.classList.contains("-translate-x-full")) {
+      mobileMenu.classList.add("-translate-x-full");
+    }
+  });
+});
 
 // Footer
 fetch("HTML/footer.html")
@@ -30,15 +58,64 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 //**Modal**//
-document.getElementById("openModal").addEventListener("click", function () {
-  document.getElementById("modal").classList.remove("hidden");
+// Modal handling
+document.addEventListener("DOMContentLoaded", function () {
+  const openModalBtn = document.getElementById("openModal");
+  const contactModal = document.getElementById("contactModal");
+  const successModal = document.getElementById("successModal");
+  const contactForm = document.getElementById("contactForm");
+  const closeContactBtn = document.getElementById("closeContactModal");
+  const closeSuccessBtn = document.getElementById("closeSuccessModal");
+
+  // Open contact modal
+  openModalBtn.addEventListener("click", () => {
+    contactModal.classList.remove("hidden");
+  });
+
+  // Close contact modal
+  closeContactBtn.addEventListener("click", () => {
+    contactModal.classList.add("hidden");
+  });
+
+  // Close success modal
+  closeSuccessBtn.addEventListener("click", () => {
+    successModal.classList.add("hidden");
+  });
+
+  // Handle form submission
+  contactForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    // Hide contact modal
+    contactModal.classList.add("hidden");
+
+    // Show success modal
+    successModal.classList.remove("hidden");
+
+    // Reset form
+    contactForm.reset();
+  });
+
+  // Close modals when clicking outside
+  window.addEventListener("click", (e) => {
+    if (e.target === contactModal) {
+      contactModal.classList.add("hidden");
+    }
+    if (e.target === successModal) {
+      successModal.classList.add("hidden");
+    }
+  });
+
+  // Close modals with Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      contactModal.classList.add("hidden");
+      successModal.classList.add("hidden");
+    }
+  });
 });
 
-document.getElementById("closeModal").addEventListener("click", function () {
-  document.getElementById("modal").classList.add("hidden");
-});
-
-//Form
+//* Form *//
 document.addEventListener("DOMContentLoaded", function () {
   console.log("✅ JavaScript is running!");
 
@@ -48,13 +125,13 @@ document.addEventListener("DOMContentLoaded", function () {
     .then((data) => {
       document.getElementById("navbar").innerHTML = data;
 
-      // Wait a bit to make sure navbar is inserted
+      // Ensure the navbar is fully loaded before adding the event listener
       setTimeout(() => {
         let quizButton = document.getElementById("open-quiz");
         if (quizButton) {
           console.log("✅ Button #open-quiz found! Adding event listener...");
           quizButton.addEventListener("click", function () {
-            console.log("🟢 Redirecting to: HTML/wineform.html");
+            console.log("🟢 Redirecting to: wineform.html");
             window.location.href = "wineform.html";
           });
         } else {
@@ -63,103 +140,4 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 100);
     })
     .catch((error) => console.error("Error loading the navbar:", error));
-
-  // ❗ Hide all questions except the first one initially
-  document.querySelectorAll(".question").forEach((q, index) => {
-    if (index !== 0) q.classList.add("hidden");
-  });
-
-  // ✅ Wine selection logic (max 2)
-  document.querySelectorAll(".wine-option").forEach((option) => {
-    option.addEventListener("click", function () {
-      console.log("✅ Click detected on a wine option!");
-
-      if (this.classList.contains("selected")) {
-        // Unselect if already selected
-        this.classList.remove("selected");
-      } else {
-        let selected = document.querySelectorAll(".wine-option.selected");
-        if (selected.length < 2) {
-          this.classList.add("selected");
-        } else {
-          console.warn("⚠️ Maximum of 2 selections allowed.");
-        }
-      }
-
-      // Move to next question if at least 1 wine is selected
-      let selected = document.querySelectorAll(".wine-option.selected");
-      if (selected.length > 0) {
-        setTimeout(() => {
-          document.getElementById("question1").classList.add("hidden");
-          document.getElementById("question2").classList.remove("hidden");
-        }, 500);
-      }
-
-      console.log("Classes after click:", this.classList);
-    });
-  });
-
-  // ✅ Next button logic with validation
-  document.querySelectorAll(".next-btn").forEach((button) => {
-    button.addEventListener("click", function () {
-      let parentQuestion = this.closest(".question");
-      let next = document.getElementById(this.dataset.next);
-
-      let selected = parentQuestion.querySelectorAll(".selected");
-
-      if (selected.length === 0) {
-        if (!parentQuestion.querySelector(".warning-message")) {
-          let warning = document.createElement("p");
-          warning.textContent = "Please select at least one option!";
-          warning.classList.add("warning-message", "text-red-500", "mt-2");
-          parentQuestion.appendChild(warning);
-        }
-        return;
-      }
-
-      // Hide current question & show next
-      parentQuestion.classList.add("hidden");
-      next.classList.remove("hidden");
-    });
-  });
-
-  // ✅ Single selection for drink, flavor, and food options
-  document
-    .querySelectorAll(".drink-option, .flavor-option, .food-option")
-    .forEach((button) => {
-      button.addEventListener("click", function () {
-        let siblings = this.parentElement.children;
-        Array.from(siblings).forEach((sibling) =>
-          sibling.classList.remove("selected")
-        );
-        this.classList.add("selected");
-      });
-    });
-
-  // ✅ Show final recommendation
-  function showRecommendation() {
-    let selectedWine = document.querySelector(".wine-option.selected");
-    let selectedDrink = document.querySelector(".drink-option.selected");
-    let selectedFlavor = document.querySelector(".flavor-option.selected");
-    let selectedFood = document.querySelector(".food-option.selected");
-
-    if (selectedWine && selectedDrink && selectedFlavor && selectedFood) {
-      document.getElementById("question3").classList.add("hidden");
-      document.getElementById("recommendation").classList.remove("hidden");
-      document.getElementById(
-        "result-text"
-      ).textContent = `We recommend a ${selectedWine.textContent} that is ${selectedDrink.textContent}, with ${selectedFlavor.textContent} notes, paired with ${selectedFood.textContent}.`;
-    }
-  }
-
-  // ✅ Restart quiz
-  function restartQuiz() {
-    document
-      .querySelectorAll(".selected")
-      .forEach((el) => el.classList.remove("selected"));
-    document
-      .querySelectorAll(".question")
-      .forEach((q) => q.classList.add("hidden"));
-    document.getElementById("question1").classList.remove("hidden");
-  }
 });

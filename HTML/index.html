@@ -198,26 +198,32 @@
       </div>
     </footer>
 
-    <!-- Modal -->
+    <!-- Contact Form Modal -->
     <div
-      id="modal"
+      id="contactModal"
       class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden"
     >
       <div class="bg-white p-6 rounded-lg shadow-lg w-96">
         <h2 class="text-xl font-bold mb-4">Contact Us</h2>
-        <form>
-          <label class="block text-sm font-medium">Name</label>
-          <input type="text" class="w-full p-2 border rounded mb-4" required />
+        <form id="contactForm">
+          <div class="mb-4">
+            <label class="block text-sm font-medium">Name</label>
+            <input type="text" class="w-full p-2 border rounded" required />
+          </div>
 
-          <label class="block text-sm font-medium">Email</label>
-          <input type="email" class="w-full p-2 border rounded mb-4" required />
+          <div class="mb-4">
+            <label class="block text-sm font-medium">Email</label>
+            <input type="email" class="w-full p-2 border rounded" required />
+          </div>
 
-          <label class="block text-sm font-medium">Message</label>
-          <textarea
-            class="w-full p-2 border rounded mb-4"
-            rows="4"
-            required
-          ></textarea>
+          <div class="mb-4">
+            <label class="block text-sm font-medium">Message</label>
+            <textarea
+              class="w-full p-2 border rounded"
+              rows="4"
+              required
+            ></textarea>
+          </div>
 
           <button
             type="submit"
@@ -226,7 +232,33 @@
             Send
           </button>
         </form>
-        <button id="closeModal" class="mt-4 text-red-500">Close</button>
+        <button id="closeContactModal" class="mt-4 text-red-500">Close</button>
+      </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div
+      id="successModal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden"
+    >
+      <div class="bg-white p-6 rounded-lg shadow-lg w-80 text-center">
+        <img
+          src="../images/howie-r-CjI_2QX7hvU-unsplash (1).jpg"
+          alt="thanks"
+          class="w-20 h-20 mx-auto mb-2"
+        />
+        <h2 class="text-xl font-bold text-green-600">
+          Message Sent Successfully! ✅
+        </h2>
+        <p class="mt-2">
+          Thank you for reaching out. We'll get back to you soon.
+        </p>
+        <button
+          id="closeSuccessModal"
+          class="mt-4 bg-yellow-500 text-white px-4 py-2 rounded-lg"
+        >
+          OK
+        </button>
       </div>
     </div>
 
