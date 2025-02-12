@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wine Quiz</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body class="bg-gray-100">
+    <header>
+      <div id="navbar"></div>
+    </header>
+
+    <!-- Form 1 -->
+
+    <main class="px-8 sm:px-12 lg:px-[200px] min-h-screen">
+      <!-- Breadcrumb -->
+      <div class="flex justify-center mt-6">
+        <div class="flex space-x-8 text-md font-semibold text-gray-600">
+          <div class="step text-gray-500" id="step1">🍇 Preferencias</div>
+          <div class="step text-gray-500" id="step2">🍽️ Maridaje</div>
+          <div class="step text-gray-500" id="step3">🍷 Recomendación</div>
+        </div>
+      </div>
+
+      <div
+        class="bg-white p-6 rounded-lg shadow-lg w-full max-w-4xl mx-auto mt-10"
+      >
+        <h1 class="text-2xl font-bold text-center mb-6 mt-10">
+          Find Your Perfect Wine Pairing
+        </h1>
+        <div id="quiz-container">
+          <!-- Qs 1 -->
+          <div class="question" id="question1">
+            <p class="text-gray-600 mb-4 text-center mt-4 text-lg">
+              There are many styles of wine, each with its own unique flavor
+              profile.
+            </p>
+            <p class="text-lg font-bold mb-4 mt-10">
+              Wine lovers: What kind of wine do you prefer?
+            </p>
+
+            <div class="flex justify-between gap-4 mt-14">
+              <button class="wine-option wine-img" data-next="question2">
+                <img src="../images/red_wine.jpg" alt="Red Wine" />
+                <p class="text-center mt-2">
+                  Red Wine – Rich and bold flavors.
+                </p>
+              </button>
+              <button class="wine-option wine-img" data-next="question2">
+                <img src="../images/white_wine.jpeg" alt="White Wine" />
+                <p class="text-center mt-2">White Wine – Crisp and fresh.</p>
+              </button>
+              <button class="wine-option wine-img" data-next="question2">
+                <img src="../images/rose_wine.jpg" alt="Rosé Wine" />
+                <p class="text-center mt-2">Rosé Wine – Light and fruity.</p>
+              </button>
+              <button class="wine-option wine-img" data-next="question2">
+                <img src="../images/sparkling-wine.jpg" alt="Sparkling Wine" />
+                <p class="text-center mt-2">
+                  Sparkling Wine – Bubbly and festive.
+                </p>
+              </button>
+            </div>
+          </div>
+
+          <hr class="border-t-4 border-[#DABF21] my-32 mb-8" />
+          <!-- Qs 2 y 3 -->
+          <div class="question" id="question2">
+            <h2 class="text-lg font-bold mb-4">
+              Do you like your drink to be sweet or dry?
+            </h2>
+            <div class="flex flex-col gap-4">
+              <button class="option-btn">
+                Sweet – For those who enjoy a sugary or fruity taste.
+              </button>
+              <button class="option-btn">
+                Semi-Sweet – A balanced choice, not too sweet but still with a
+                hint of fruitiness
+              </button>
+              <button class="option-btn">
+                Balanced – A middle ground, offering both sweetness and dryness
+                in harmony
+              </button>
+              <button class="option-btn">
+                Dry – For lovers of dry, crisp, and less sugary drinks.
+              </button>
+            </div>
+          </div>
+
+          <hr class="border-t-4 border-[#DABF21] my-8 mb-8" />
+          <div class="question" id="question3">
+            <h2 class="text-lg font-bold mb-4">
+              What flavors do you enjoy the most?
+            </h2>
+            <div class="flex flex-col gap-4">
+              <button class="option-btn">
+                Fruity – Notes of berries, citrus, apple, or tropical fruits.
+              </button>
+              <button class="option-btn">
+                Floral – Delicate aromas of flowers, such as jasmine, rose, or
+                lavender.
+              </button>
+              <button class="option-btn">
+                Earthy – Flavors that remind you of the earth, like mushrooms,
+                forest floor.
+              </button>
+              <button class="option-btn">
+                Spicy – Hints of pepper, clove, cinnamon, or nutmeg.
+              </button>
+              <button class="option-btn">
+                Nutty – Subtle hints of toasted almonds, hazelnuts, or oak.
+              </button>
+            </div>
+          </div>
+
+          <hr class="border-t-4 border-[#DABF21] my-8 mb-8" />
+
+          <!-- Qs 4 -->
+          <div class="question" id="question3">
+            <h2 class="h2-q1 text-lg font-bold mb-14 mt-10">
+              What kind of food are you planning to pair it with?
+            </h2>
+            <div class="flex flex-wrap gap-4 justify-center mb-12 mt-4">
+              <img src="../images/cheesse.jpg" class="food-img random-offset" />
+              <img
+                src="../images/medium-rare-steak.jpg"
+                class="food-img random-offset"
+              />
+              <img src="../images/pasta.jpg" class="food-img random-offset" />
+              <img src="../images/seafood.jpg" class="food-img random-offset" />
+              <img
+                src="../images/desserts.jpg"
+                class="food-img random-offset"
+              />
+            </div>
+
+            <div class="flex flex-col gap-4">
+              <button class="option-btn">
+                Steaks, roasts, or grilled meats.
+              </button>
+              <button class="option-btn">
+                Fish, shellfish, and light seafood dishes
+              </button>
+              <button class="option-btn">
+                Pasta, Saucy, creamy, or cheese-based pasta dishes.
+              </button>
+              <button class="option-btn">
+                Cheeses, soft & hard cheeses, or cheese platters..
+              </button>
+              <button class="option-btn">
+                Dessert – Chocolate, fruit, or rich pastries.
+              </button>
+              <button class="option-btn food-option">
+                None (Just the drink!)
+              </button>
+            </div>
+            <div class="flex justify-end mt-6">
+              <button class="bg-[#7F1B67] text-white px-4 py-2 rounded">
+                Find Your Match
+              </button>
+            </div>
+          </div>
+
+          <div class="question hidden" id="recommendation">
+            <h2 class="text-lg font-bold mb-4 text-center">
+              Here is your perfect wine pairing!
+            </h2>
+            <p id="result-text" class="text-center text-gray-600"></p>
+            <button
+              id="restart-btn "
+              class="next-btn bg-gray-500 text-white px-4 py-2 mt-4 rounded"
+              onclick="restartQuiz()"
+            >
+              Restart
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <script src="../JavaScript/index.js"></script>
+
+      <script>
+        fetch("navbar.html")
+          .then((response) => response.text())
+          .then((data) => {
+            document.getElementById("navbar").innerHTML = data;
+          })
+          .catch((error) => console.error("Error al cargar el navbar:", error));
+      </script>
+    </main>
+  </body>
+</html>

@@ -1,5 +1,23 @@
 "use strict";
 
+// Navbar
+fetch("navbar.html")
+  .then((response) => response.text())
+  .then((data) => {
+    document.getElementById("navbar").innerHTML = data;
+  })
+  .catch((error) => console.error("Error al cargar el navbar:", error));
+
+//NAV hanburguesa
+
+// Footer
+fetch("HTML/footer.html")
+  .then((response) => response.text())
+  .then((data) => {
+    document.getElementById("footer-container").innerHTML = data;
+  })
+  .catch((error) => console.error("Error al cargar el footer:", error));
+
 //Hearts
 document.addEventListener("DOMContentLoaded", () => {
   const hearts = document.querySelectorAll(".heart");
@@ -20,108 +38,128 @@ document.getElementById("closeModal").addEventListener("click", function () {
   document.getElementById("modal").classList.add("hidden");
 });
 
-//**Forms Wine pair**//
+//Form
 document.addEventListener("DOMContentLoaded", function () {
-  let currentStep = 1;
-  const totalSteps = 3;
+  console.log("✅ JavaScript is running!");
 
-  const stepContent = document.getElementById("step-content");
-  const stepIndicator = document.getElementById("step-indicator");
-  const prevButton = document.getElementById("prev-button");
-  const nextButton = document.getElementById("next-button");
+  // Load Navbar
+  fetch("navbar.html")
+    .then((response) => response.text())
+    .then((data) => {
+      document.getElementById("navbar").innerHTML = data;
 
-  function updateStepContent() {
-    stepContent.innerHTML = renderStepContent(currentStep);
-    updateStepIndicator();
-  }
+      // Wait a bit to make sure navbar is inserted
+      setTimeout(() => {
+        let quizButton = document.getElementById("open-quiz");
+        if (quizButton) {
+          console.log("✅ Button #open-quiz found! Adding event listener...");
+          quizButton.addEventListener("click", function () {
+            console.log("🟢 Redirecting to: HTML/wineform.html");
+            window.location.href = "wineform.html";
+          });
+        } else {
+          console.error("❌ Button #open-quiz NOT found!");
+        }
+      }, 100);
+    })
+    .catch((error) => console.error("Error loading the navbar:", error));
 
-  function updateStepIndicator() {
-    stepIndicator.innerHTML = `Step ${currentStep} of ${totalSteps}`;
-  }
+  // ❗ Hide all questions except the first one initially
+  document.querySelectorAll(".question").forEach((q, index) => {
+    if (index !== 0) q.classList.add("hidden");
+  });
 
-  function renderStepContent(step) {
-    switch (step) {
-      case 1:
-        return `
-          <h2>Wine Preferences</h2>
-          <p>What kind of wine do you prefer?</p>
-          <div class="options">
-            <button><img src="/images/red_wine.jpg" alt="Red Wine"><p>Red Wine</p></button>
-            <button><img src="/images/white_wine.jpg" alt="White Wine"><p>White Wine</p></button>
-            <button><img src="/images/rose_wine.jpg" alt="Rosé Wine"><p>Rosé Wine</p></button>
-            <button><img src="/images/sparkling-wine.jpg" alt="Sparkling Wine"><p>Sparkling Wine</p></button>
-          </div>
-        `;
-      case 2:
-        return `
-          <h2>Taste Profile</h2>
-          <p>Do you like your drink to be sweet or dry?</p>
-          <div class="options">
-            <button>Sweet</button>
-            <button>Semi-Sweet</button>
-            <button>Balanced</button>
-            <button>Dry</button>
-          </div>
-          <p>What flavors do you enjoy the most?</p>
-          <div class="options">
-            <button>Fruity</button>
-            <button>Floral</button>
-            <button>Earthy</button>
-            <button>Nutty</button>
-          </div>
-        `;
-      case 3:
-        return `
-          <h2>Food Pairing</h2>
-          <p>What type of food are you planning to pair it with?</p>
-          <div class="options">
-            <button><img src="/images/steak.jpg" alt="Steak"><p>Steaks, roasts, or grilled meats</p></button>
-            <button><img src="/images/seafood.jpg" alt="Fish"><p>Fish, shellfish, and light seafood dishe/p></button>
-            <button><img src="/images/pasta.jpg" alt="Pasta"><p>Saucy, creamy, or cheese-based pasta dishes.</p></button>
-            <button><img src="/images/cheesse.jpg" alt="Cheese"><p>Soft cheeses, hard cheeses, or cheese platters</p></button>
-            <button><img src="/images/desserts.jpg" alt="Cheese"><p>Dessert – Chocolate, fruit, or rich pastries.</p></button>
-             <button><img src="/images/red_bottlle.jpg" alt="Cheese"><p>None (Just the drink!)</p></button>
-              
-          </div>
-        `;
-      default:
-        return "";
+  // ✅ Wine selection logic (max 2)
+  document.querySelectorAll(".wine-option").forEach((option) => {
+    option.addEventListener("click", function () {
+      console.log("✅ Click detected on a wine option!");
+
+      if (this.classList.contains("selected")) {
+        // Unselect if already selected
+        this.classList.remove("selected");
+      } else {
+        let selected = document.querySelectorAll(".wine-option.selected");
+        if (selected.length < 2) {
+          this.classList.add("selected");
+        } else {
+          console.warn("⚠️ Maximum of 2 selections allowed.");
+        }
+      }
+
+      // Move to next question if at least 1 wine is selected
+      let selected = document.querySelectorAll(".wine-option.selected");
+      if (selected.length > 0) {
+        setTimeout(() => {
+          document.getElementById("question1").classList.add("hidden");
+          document.getElementById("question2").classList.remove("hidden");
+        }, 500);
+      }
+
+      console.log("Classes after click:", this.classList);
+    });
+  });
+
+  // ✅ Next button logic with validation
+  document.querySelectorAll(".next-btn").forEach((button) => {
+    button.addEventListener("click", function () {
+      let parentQuestion = this.closest(".question");
+      let next = document.getElementById(this.dataset.next);
+
+      let selected = parentQuestion.querySelectorAll(".selected");
+
+      if (selected.length === 0) {
+        if (!parentQuestion.querySelector(".warning-message")) {
+          let warning = document.createElement("p");
+          warning.textContent = "Please select at least one option!";
+          warning.classList.add("warning-message", "text-red-500", "mt-2");
+          parentQuestion.appendChild(warning);
+        }
+        return;
+      }
+
+      // Hide current question & show next
+      parentQuestion.classList.add("hidden");
+      next.classList.remove("hidden");
+    });
+  });
+
+  // ✅ Single selection for drink, flavor, and food options
+  document
+    .querySelectorAll(".drink-option, .flavor-option, .food-option")
+    .forEach((button) => {
+      button.addEventListener("click", function () {
+        let siblings = this.parentElement.children;
+        Array.from(siblings).forEach((sibling) =>
+          sibling.classList.remove("selected")
+        );
+        this.classList.add("selected");
+      });
+    });
+
+  // ✅ Show final recommendation
+  function showRecommendation() {
+    let selectedWine = document.querySelector(".wine-option.selected");
+    let selectedDrink = document.querySelector(".drink-option.selected");
+    let selectedFlavor = document.querySelector(".flavor-option.selected");
+    let selectedFood = document.querySelector(".food-option.selected");
+
+    if (selectedWine && selectedDrink && selectedFlavor && selectedFood) {
+      document.getElementById("question3").classList.add("hidden");
+      document.getElementById("recommendation").classList.remove("hidden");
+      document.getElementById(
+        "result-text"
+      ).textContent = `We recommend a ${selectedWine.textContent} that is ${selectedDrink.textContent}, with ${selectedFlavor.textContent} notes, paired with ${selectedFood.textContent}.`;
     }
   }
 
-  prevButton.addEventListener("click", function () {
-    if (currentStep > 1) {
-      currentStep--;
-      updateStepContent();
-    }
-  });
-
-  nextButton.addEventListener("click", function () {
-    if (currentStep < totalSteps) {
-      currentStep++;
-      updateStepContent();
-    } else {
-      alert("Form submitted!");
-    }
-  });
-
-  updateStepContent();
-});
-
-//** connect the form **//
-document.addEventListener("DOMContentLoaded", function () {
-  const quizLink = document.querySelector(
-    'a[href="#"][class*="hover:text-yellow-500"]'
-  );
-  const formContainer = document.getElementById("form-container"); // Contenedor del formulario
-  const closeButton = document.getElementById("close-form"); // Botón para cerrar el formulario
-
-  quizLink.addEventListener("click", function (event) {
-    event.preventDefault(); // Evita que el enlace navegue a otro lugar
-    formContainer.style.display = "block"; // Muestra el formulario
-  });
-
-  closeButton.addEventListener("click", function () {
-    formContainer.style.display = "none"; // Oculta el formulario
-  });
+  // ✅ Restart quiz
+  function restartQuiz() {
+    document
+      .querySelectorAll(".selected")
+      .forEach((el) => el.classList.remove("selected"));
+    document
+      .querySelectorAll(".question")
+      .forEach((q) => q.classList.add("hidden"));
+    document.getElementById("question1").classList.remove("hidden");
+  }
 });

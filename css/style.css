@@ -10,9 +10,15 @@ main {
   max-width: 1920px;
   margin: 0 auto;
 }
+
 /* navbar */
 .navbar li {
   position: relative;
+}
+
+/* Hide the menu */
+.navbar-menu-hidden {
+  display: none;
 }
 
 /* Ajustar los submenús */
@@ -29,7 +35,7 @@ main {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-  padding: 10px 6px; /* Añade más área para evitar que desaparezca */
+  padding: 10px 10px; /* Añade más área para evitar que desaparezca */
   z-index: 10;
 }
 
@@ -175,7 +181,8 @@ main {
   border-radius: 8px;
 }
 
-.p-hop {
+.p-hop,
+.h2-q1 {
   font-family: "DM Sans", serif;
   font-weight: bold;
 }
@@ -204,6 +211,41 @@ main {
 }
 
 /* Form */
-#form-container {
-  display: none; /* to hide */
+.wine-img {
+  width: 100%; /* Ensure the button resizes properly */
+  max-width: 150px; /* Maintain a consistent max width */
+  height: 180px; /* Adjust to match the other images */
+  object-fit: cover; /* This makes sure the images fill the space evenly */
+}
+
+.wine-option img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures all images fill their container */
+}
+
+.option-btn {
+  border: 2px solid #dabf21;
+  border-radius: 2px;
+  padding: 10px;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+}
+
+.option-btn.selected {
+  background-color: #dabf21;
+  color: white;
+}
+
+.food-img {
+  width: 120px;
+  height: auto;
+  border-radius: 8px;
+}
+.random-offset:nth-child(odd) {
+  transform: translateY(10px);
+}
+.random-offset:nth-child(even) {
+  transform: translateY(-10px);
 }
