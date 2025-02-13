@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Wine</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body class="bg-gray-100">
+    <header>
+      <div id="navbar"></div>
+    </header>
+    <main
+      class="flex flex-col items-center justify-center px-8 sm:px-12 lg:px-[200px] mt-12"
+    >
+      <img
+        src="../images/Website-Banner-for-wine-tasting.jpg"
+        alt="wine w-full max-w-4xl"
+        class="banner-search"
+      />
+      <div class="flex flex-col items-center justify-center mt-14">
+        <h2 class="h2-search text-2xl">Find the best Pair-Wines</h2>
+      </div>
+
+      <div class="flex w-full max-w-xl mt-14 mb-14">
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="Search for your favorite wine  or food recipe to find the pairfect match!!!"
+          class="w-full h-12 p-3 border border-gray-300 rounded-l-lg focus:outline-none focus:border-purple-600 transition"
+        />
+        <button
+          onclick="searchPairings()"
+          class="bg-[#4C1D5A] text-[#F5F5F5] px-6 h-12 rounded-r-lg hover:bg-purple-800 transition-transform transform hover:scale-105"
+        >
+          Search
+        </button>
+      </div>
+      <div class="results-container"></div>
+    </main>
+
+    <script src="../JavaScript/index.js"></script>
+    <div id="footer-container"></div>
+  </body>
+</html>

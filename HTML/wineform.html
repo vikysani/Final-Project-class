@@ -53,32 +53,47 @@
             <p class="text-lg font-bold mb-4 mt-10">
               Wine lovers: What kind of wine do you prefer?
             </p>
-
-            <div class="flex justify-between gap-4 mt-14">
-              <button class="wine-option wine-img" data-next="question2">
-                <img src="../images/red_wine.jpg" alt="Red Wine" />
-                <p class="text-center mt-2">
-                  Red Wine – Rich and bold flavors.
-                </p>
-              </button>
-              <button class="wine-option wine-img" data-next="question2">
-                <img src="../images/white_wine.jpeg" alt="White Wine" />
-                <p class="text-center mt-2">White Wine – Crisp and fresh.</p>
-              </button>
-              <button class="wine-option wine-img" data-next="question2">
-                <img src="../images/rose_wine.jpg" alt="Rosé Wine" />
-                <p class="text-center mt-2">Rosé Wine – Light and fruity.</p>
-              </button>
-              <button class="wine-option wine-img" data-next="question2">
-                <img src="../images/sparkling-wine.jpg" alt="Sparkling Wine" />
-                <p class="text-center mt-2">
-                  Sparkling Wine – Bubbly and festive.
-                </p>
-              </button>
-            </div>
           </div>
 
-          <hr class="border-t-4 border-[#DABF21] my-32 mb-8" />
+          <div class="flex flex-wrap gap-4 justify-center mb-10 mt-10">
+            <img
+              src="../images/rose_wine.jpg"
+              alt="rose"
+              class="wine-img random-offset"
+            />
+
+            <img
+              src="../images/white_wine.jpeg"
+              alt="white"
+              class="wine-img random-offset"
+            />
+            <img
+              src="../images/red_wine.jpg"
+              alt="red"
+              class="wine-img random-offset"
+            />
+            <img
+              src="../images/sparkling-wine.jpg"
+              alt="prosecco"
+              class="wine-img random-offset"
+            />
+          </div>
+          <div class="flex flex-col gap-4">
+            <button class="wine-option option-btn">
+              Rosé Wine – Light and fruity
+            </button>
+            <button class="wine-option option-btn">
+              White Wine – Crisp and fresh.
+            </button>
+            <button class="wine-option option-btn">
+              Red Wine – Rich and bold flavors. .
+            </button>
+            <button class="wine-option option-btn">
+              Sparkling Wine – Bubbly and festive.
+            </button>
+          </div>
+
+          <hr class="border-t-4 border-[#BDA522] my-32 mb-8 mt-8" />
           <!-- Qs 2 y 3 -->
           <div class="question" id="question2">
             <h2 class="text-lg font-bold mb-4">
@@ -128,7 +143,7 @@
             </div>
           </div>
 
-          <hr class="border-t-4 border-[#DABF21] my-8 mb-8" />
+          <hr class="border-t-4 border-[#BDA522] my-8 mb-8" />
 
           <!-- Qs 4 -->
           <div class="question" id="question4">
@@ -191,17 +206,9 @@
           </div>
         </div>
       </div>
-
-      <script src="../JavaScript/index.js"></script>
-
-      <script>
-        fetch("navbar.html")
-          .then((response) => response.text())
-          .then((data) => {
-            document.getElementById("navbar").innerHTML = data;
-          })
-          .catch((error) => console.error("Error al cargar el navbar:", error));
-      </script>
     </main>
+
+    <script src="../JavaScript/index.js"></script>
+    <div id="footer-container"></div>
   </body>
 </html>
