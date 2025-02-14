@@ -29,6 +29,7 @@
 
     <main class="px-8 sm:px-12 lg:px-[200px] min-h-screen">
       <!-- Breadcrumb -->
+
       <div class="flex justify-center mt-6">
         <div class="flex space-x-8 text-md font-semibold text-gray-600">
           <div class="step text-gray-500" id="step1">🍇 Preferencias</div>
@@ -43,167 +44,239 @@
         <h1 class="text-2xl font-bold text-center mb-6 mt-10">
           Find Your Perfect Wine Pairing
         </h1>
+
         <div id="quiz-container">
-          <!-- Qs 1 -->
-          <div class="question" id="question1">
-            <p class="text-gray-600 mb-4 text-center mt-4 text-lg">
-              There are many styles of wine, each with its own unique flavor
-              profile.
-            </p>
-            <p class="text-lg font-bold mb-4 mt-10">
-              Wine lovers: What kind of wine do you prefer?
-            </p>
-          </div>
-
-          <div class="flex flex-wrap gap-4 justify-center mb-10 mt-10">
-            <img
-              src="../images/rose_wine.jpg"
-              alt="rose"
-              class="wine-img random-offset"
-            />
-
-            <img
-              src="../images/white_wine.jpeg"
-              alt="white"
-              class="wine-img random-offset"
-            />
-            <img
-              src="../images/red_wine.jpg"
-              alt="red"
-              class="wine-img random-offset"
-            />
-            <img
-              src="../images/sparkling-wine.jpg"
-              alt="prosecco"
-              class="wine-img random-offset"
-            />
-          </div>
-          <div class="flex flex-col gap-4">
-            <button class="wine-option option-btn">
-              Rosé Wine – Light and fruity
-            </button>
-            <button class="wine-option option-btn">
-              White Wine – Crisp and fresh.
-            </button>
-            <button class="wine-option option-btn">
-              Red Wine – Rich and bold flavors. .
-            </button>
-            <button class="wine-option option-btn">
-              Sparkling Wine – Bubbly and festive.
-            </button>
-          </div>
-
-          <hr class="border-t-4 border-[#BDA522] my-32 mb-8 mt-8" />
-          <!-- Qs 2 y 3 -->
-          <div class="question" id="question2">
-            <h2 class="text-lg font-bold mb-4">
-              Do you like your drink to be sweet or dry?
-            </h2>
-            <div class="flex flex-col gap-4">
-              <button class="drink-option option-btn">
-                Sweet – For those who enjoy a sugary or fruity taste.
-              </button>
-              <button class="drink-option option-btn">
-                Semi-Sweet – A balanced choice, not too sweet but still with a
-                hint of fruitiness
-              </button>
-              <button class="drink-option option-btn">
-                Balanced – A middle ground, offering both sweetness and dryness
-                in harmony
-              </button>
-              <button class="drink-option option-btn">
-                Dry – For lovers of dry, crisp, and less sugary drinks.
-              </button>
+          <form d="wine-quiz-form" action="" method="GET">
+            <!-- Qs 1 -->
+            <div class="question" id="question1">
+              <p class="text-gray-600 mb-4 text-center mt-4 text-lg">
+                There are many styles of wine, each with its own unique flavor
+                profile.
+              </p>
+              <p class="text-lg font-bold mb-4 mt-10">
+                Wine lovers: What kind of wine do you prefer?
+              </p>
             </div>
-          </div>
 
-          <hr class="border-t-4 border-[#DABF21] my-8 mb-8" />
-          <div class="question" id="question3">
-            <h2 class="text-lg font-bold mb-4">
-              What flavors do you enjoy the most?
-            </h2>
-            <div class="flex flex-col gap-4">
-              <button class="flavor-option option-btn">
-                Fruity – Notes of berries, citrus, apple, or tropical fruits.
-              </button>
-              <button class="flavor-option option-btn">
-                Floral – Delicate aromas of flowers, such as jasmine, rose, or
-                lavender.
-              </button>
-              <button class="flavor-option option-btn">
-                Earthy – Flavors that remind you of the earth, like mushrooms,
-                forest floor.
-              </button>
-              <button class="flavor-option option-btn">
-                Spicy – Hints of pepper, clove, cinnamon, or nutmeg.
-              </button>
-              <button class="flavor-option option-btn">
-                Nutty – Subtle hints of toasted almonds, hazelnuts, or oak.
-              </button>
-            </div>
-          </div>
-
-          <hr class="border-t-4 border-[#BDA522] my-8 mb-8" />
-
-          <!-- Qs 4 -->
-          <div class="question" id="question4">
-            <h2 class="h2-q1 text-lg font-bold mb-14 mt-10">
-              What kind of food are you planning to pair it with?
-            </h2>
-            <div class="flex flex-wrap gap-4 justify-center mb-12 mt-4">
-              <img src="../images/cheesse.jpg" class="food-img random-offset" />
+            <div class="flex flex-wrap gap-4 justify-center mb-10 mt-10">
               <img
-                src="../images/medium-rare-steak.jpg"
-                class="food-img random-offset"
+                src="../images/rose_wine.jpg"
+                alt="rose"
+                class="wine-img random-offset"
               />
-              <img src="../images/pasta.jpg" class="food-img random-offset" />
-              <img src="../images/seafood.jpg" class="food-img random-offset" />
+
               <img
-                src="../images/desserts.jpg"
-                class="food-img random-offset"
+                src="../images/white_wine.jpeg"
+                alt="white"
+                class="wine-img random-offset"
+              />
+              <img
+                src="../images/red_wine.jpg"
+                alt="red"
+                class="wine-img random-offset"
+              />
+              <img
+                src="../images/sparkling-wine.jpg"
+                alt="prosecco"
+                class="wine-img random-offset"
               />
             </div>
-
             <div class="flex flex-col gap-4">
-              <button class="food-option option-btn">
-                Steaks, roasts, or grilled meats.
-              </button>
-              <button class="food-option option-btn">
-                Fish, shellfish, and light seafood dishes
-              </button>
-              <button class="food-option option-btn">
-                Pasta, Saucy, creamy, or cheese-based pasta dishes.
-              </button>
-              <button class="food-option option-btn">
-                Cheeses, soft & hard cheeses, or cheese platters..
-              </button>
-              <button class="food-option option-btn">
-                Dessert – Chocolate, fruit, or rich pastries.
-              </button>
-              <button class="food-option option-btn">
-                None (Just the drink!)
-              </button>
+              <label class="wine-option">
+                <input type="radio" name="wine-preference" value="rose" />
+                <span> Rosé Wine – Light and fruity</span>
+              </label>
+              <label class="wine-option">
+                <input type="radio" name="wine-preference" value="white" />
+                <span>White Wine – Crisp and fresh.</span>
+              </label>
+              <label class="wine-option">
+                <input type="radio" name="wine-preference" value="red" />
+                <span> Red Wine – Rich and bold flavors.</span>
+              </label>
+              <label class="wine-option">
+                <input type="radio" name="wine-preference" value="Sparkling" />
+                <span>Sparkling Wine – Bubbly and festive.</span>
+              </label>
             </div>
-            <div class="flex justify-end mt-6">
-              <button class="bg-[#7F1B67] text-white px-4 py-2 rounded">
-                Find Your Match
-              </button>
-            </div>
-          </div>
 
-          <div class="question hidden" id="recommendation">
-            <h2 class="text-lg font-bold mb-4 text-center">
-              Here is your perfect wine pairing!
-            </h2>
-            <p id="result-text" class="text-center text-gray-600"></p>
-            <button
-              id="restart-btn "
-              class="next-btn bg-gray-500 text-white px-4 py-2 mt-4 rounded"
-              onclick="restartQuiz()"
-            >
-              Restart
-            </button>
-          </div>
+            <hr class="border-t-4 border-[#BDA522] my-32 mb-8 mt-8" />
+            <!-- Qs 2 y 3 -->
+            <div class="question" id="question2">
+              <h2 class="text-lg font-bold mb-4">
+                Do you like your drink to be sweet or dry?
+              </h2>
+              <div class="flex flex-col gap-4">
+                <label class="wine-option">
+                  <input
+                    type="radio"
+                    name="wine-classification"
+                    value="sweet"
+                  />
+                  <span
+                    >Sweet – For those who enjoy a sugary or fruity taste.</span
+                  >
+                </label>
+                <label class="wine-option">
+                  <input
+                    type="radio"
+                    name="wine-classification"
+                    value="semi-sweet"
+                  />
+                  <span
+                    >Semi-Sweet – A balanced choice, not too sweet but still
+                    with a hint of fruitiness</span
+                  >
+                </label>
+
+                <label class="wine-option">
+                  <input
+                    type="radio"
+                    name="wine-classification"
+                    value="balanced"
+                  />
+                  <span>
+                    Balanced – A middle ground, offering both sweetness and
+                    dryness in harmony</span
+                  >
+                </label>
+                <label class="wine-option">
+                  <input type="radio" name="wine-classification" value="dry" />
+                  <span>
+                    Dry – For lovers of dry, crisp, and less sugary
+                    drinks.</span
+                  >
+                </label>
+              </div>
+            </div>
+
+            <hr class="border-t-4 border-[#DABF21] my-8 mb-8" />
+            <div class="question" id="question3">
+              <h2 class="text-lg font-bold mb-4">
+                What flavors do you enjoy the most?
+              </h2>
+              <div class="flex flex-col gap-4">
+                <label class="wine-option">
+                  <input type="radio" name="wine-flavor" value="fruity" />
+                  <span>
+                    Fruity – Notes of berries, citrus, apple, or tropical
+                    fruits.
+                  </span>
+                </label>
+
+                <label class="wine-option">
+                  <input type="radio" name="wine-flavor" value="floral" />
+                  <span>
+                    Floral – Delicate aromas of flowers, such as jasmine, rose,
+                    or lavender.
+                  </span>
+                </label>
+
+                <label class="wine-option">
+                  <input type="radio" name="wine-flavor" value="earthy" />
+                  <span>
+                    Earthy – Flavors that remind you of the earth, like
+                    mushrooms, forest floor.
+                  </span>
+                </label>
+
+                <label class="wine-option">
+                  <input type="radio" name="wine-flavor" value="spicy" />
+                  <span
+                    >Spicy – Hints of pepper, clove, cinnamon, or nutmeg.</span
+                  >
+                </label>
+
+                <label class="wine-option">
+                  <input type="radio" name="wine-flavor" value="nutty" />
+                  <span>
+                    Nutty – Subtle hints of toasted almonds, hazelnuts, or oak.
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <hr class="border-t-4 border-[#BDA522] my-8 mb-8" />
+
+            <!-- Qs 4 -->
+            <div class="question" id="question4">
+              <h2 class="h2-q1 text-lg font-bold mb-14 mt-10">
+                What kind of food are you planning to pair it with?
+              </h2>
+              <div class="flex flex-wrap gap-4 justify-center mb-12 mt-4">
+                <img
+                  src="../images/cheesse.jpg"
+                  class="food-img random-offset"
+                />
+                <img
+                  src="../images/medium-rare-steak.jpg"
+                  class="food-img random-offset"
+                />
+                <img src="../images/pasta.jpg" class="food-img random-offset" />
+                <img
+                  src="../images/seafood.jpg"
+                  class="food-img random-offset"
+                />
+                <img
+                  src="../images/desserts.jpg"
+                  class="food-img random-offset"
+                />
+              </div>
+
+              <div class="flex flex-col gap-4">
+                <label class="wine-option">
+                  <input type="radio" name="food" value="meat" />
+                  <span>Steaks, roasts, or grilled meats.</span>
+                </label>
+
+                <label class="wine-option">
+                  <input type="radio" name="food" value="seafood" />
+                  <span>Fish, shellfish, and light seafood dishes</span>
+                </label>
+
+                <label class="wine-option">
+                  <input type="radio" name="food" value="pasta" />
+                  <span
+                    >Pasta, Saucy, creamy, or cheese-based pasta dishes.</span
+                  >
+                </label>
+
+                <label class="wine-option">
+                  <input type="radio" name="food" value="cheese" />
+                  <span>Cheeses, soft & hard cheeses, or cheese platters.</span>
+                </label>
+
+                <label class="wine-option">
+                  <input type="radio" name="food" value="dessert" />
+                  <span>Dessert – Chocolate, fruit, or rich pastries.</span>
+                </label>
+
+                <label class="wine-option">
+                  <input type="radio" name="food" value="none" />
+                  <span>None (Just the drink!)</span>
+                </label>
+              </div>
+              <div class="flex justify-end mt-6">
+                <button class="bg-[#7F1B67] text-white px-4 py-2 rounded">
+                  Find Your Match
+                </button>
+              </div>
+            </div>
+
+            <div class="question hidden" id="recommendation">
+              <h2 class="text-lg font-bold mb-4 text-center">
+                Here is your perfect wine pairing!
+              </h2>
+              <p id="result-text" class="text-center text-gray-600"></p>
+              <button
+                id="restart-btn "
+                class="next-btn bg-gray-500 text-white px-4 py-2 mt-4 rounded"
+                onclick="restartQuiz()"
+              >
+                Restart
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </main>

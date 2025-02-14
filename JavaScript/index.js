@@ -1,5 +1,9 @@
 "use strict";
 
+window.onload = function () {
+  window.scrollTo(0, 0);
+};
+
 // Navbar
 fetch("navbar.html")
   .then((response) => response.text())
