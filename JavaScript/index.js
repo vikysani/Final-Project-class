@@ -174,46 +174,101 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// API Configuration
-const apiKey = "9ee61f63c0f94253beca5a263c72b1dc";
-const pageType = window.location.pathname.includes("wine") ? "wine" : "beer";
-console.log(`✅ Page type: ${pageType}`);
+// API Configuration - Users interaction
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelector("button").addEventListener("click", searchPairings);
+});
 
 async function searchPairings() {
-  const query = document.getElementById("searchInput")?.value.trim();
-  if (!query) return alert("Please enter a wine, beer, or food type");
-
+  const searchInput = document.getElementById("searchInput").value.trim();
   const resultsContainer = document.querySelector(".results-container");
-  resultsContainer.innerHTML = '<div class="spinner">Loading...</div>';
 
-  // Separate endpoints for wine and beer pairings
-  const endpoint =
-    pageType === "wine" ? "food/wine/pairing" : "food/beer/recommendation";
-  const apiUrl = `https://api.spoonacular.com/${endpoint}?apiKey=${apiKey}&query=${query}`;
-
-  console.log(`ℹ️ Fetching: ${apiUrl}`);
-
-  try {
-    const response = await fetch(apiUrl, {
-      headers: { "Content-Type": "application/json" },
-    });
-    if (!response.ok)
-      throw new Error(`API request failed with status ${response.status}`);
-
-    const data = await response.json();
-    displayResults(data, query);
-  } catch (error) {
-    console.error("❌ Fetch error:", error);
+  if (!searchInput) {
     resultsContainer.innerHTML =
-      '<p class="error">Failed to retrieve results. Please check the endpoint or CORS policy.</p>';
+      "<p class='text-red-500'>Please enter a food or wine!</p>";
+    return;
   }
-}
 
-function displayResults(data, query) {
-  const resultsContainer = document.querySelector(".results-container");
-  resultsContainer.innerHTML = data.pairings?.length
-    ? `<h2>Recommended Pairings for "${query}"</h2><ul>${data.pairings
-        .map((pair) => `<li>${pair}</li>`)
-        .join("")}</ul>`
-    : "<p>No pairings found.</p>";
+  resultsContainer.innerHTML = "<p class='text-gray-500'>Searching...</p>";
+
+  let isFood =
+    !searchInput.toLowerCase().includes("wine") &&
+    !searchInput.toLowerCase().includes("chardonnay") &&
+    !searchInput.toLowerCase().includes("merlot");
+
+  let data, dishData, wineDescription;
+
+  if (isFood) {
+    data = await getWinePairing(searchInput);
+  } else {
+    dishData = await getDishPairing(searchInput);
+    wineDescription = await getWineDescription(searchInput);
+  }
+
+  console.log("API Response:", { data, dishData, wineDescription }); // <-- Debugging log
+
+  if (!data && !dishData && !wineDescription) {
+    resultsContainer.innerHTML =
+      "<p class='text-red-500'>No pairings found. Try another search!</p>";
+    return;
+  }
+
+  let output = "";
+
+  if (wineDescription) {
+    output += `<p class="text-lg font-semibold">${wineDescription.wineDescription}</p>`;
+  }
+
+  if (data?.pairingText) {
+    output += `<p class="text-lg font-semibold">${data.pairingText}</p>`;
+  }
+
+  if (dishData?.pairings?.length > 0) {
+    output += `<h3 class="text-xl font-semibold mt-4">Dishes that go well with this wine:</h3>`;
+    output += `<ul class="list-disc pl-6">`;
+    dishData.pairings.forEach((dish) => {
+      output += `<li class="text-purple-600">${dish}</li>`;
+    });
+    output += `</ul>`;
+  }
+
+  if (data?.productMatches && data.productMatches.length > 0) {
+    output += `<h3 class="text-xl font-semibold mt-4">Recommended Wine:</h3>`;
+
+    data.productMatches.forEach((product) => {
+      const priceUSD = product.price
+        ? parseFloat(product.price.replace("$", ""))
+        : null;
+      const priceEUR = priceUSD ? (priceUSD * 0.92).toFixed(2) : "N/A"; // Conversión de USD a EUR
+      let wineImage =
+        product.imageUrl || "https://via.placeholder.com/150?text=No+Image";
+
+      output += `
+        <div class="flex items-center gap-4 mt-4 p-4 border rounded-lg shadow">
+          <img src="${wineImage}" alt="${
+        product.title
+      }" class="w-24 h-24 rounded">
+          <div>
+            <h4 class="text-lg font-semibold">${product.title} - 
+              <span class="text-green-600">€${priceEUR}</span>
+            </h4>
+            ${
+              product.description
+                ? `<p class="text-gray-700">${product.description}</p>`
+                : ""
+            }
+            <a href="${
+              product.link
+            }" target="_blank" class="text-blue-500 underline">Buy Here</a>
+          </div>
+        </div>
+      `;
+    });
+  } else if (!wineDescription && !data?.pairingText) {
+    // Solo mostramos el mensaje si no hay absolutamente NADA
+    output +=
+      "<p class='text-red-500'>No wine recommendations found. Try another search!</p>";
+  }
+
+  resultsContainer.innerHTML = output;
 }
