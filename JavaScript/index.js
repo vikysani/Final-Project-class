@@ -174,13 +174,121 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// API Configuration - Users interaction
+//**enter search*//
 document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("searchInput");
+  const searchButton = document.querySelector("button");
+
+  searchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault(); // Evita que el formulario se envíe si está dentro de un <form>
+      searchPairings();
+    }
+  });
+
+  searchButton.addEventListener("click", searchPairings);
+});
+
+//**API*//
+import { getDishPairing, getWinePairing, getWineDescription } from "./api.js";
+
+// Lista de vinos para mejorar la detección
+const wineList = new Set([
+  "assyrtiko",
+  "pinot blanc",
+  "cortese",
+  "roussanne",
+  "moschofilero",
+  "muscadet",
+  "viognier",
+  "verdicchio",
+  "greco",
+  "marsanne",
+  "white burgundy",
+  "chardonnay",
+  "gruener veltliner",
+  "white rioja",
+  "frascati",
+  "gavi",
+  "trebbiano",
+  "sauvignon blanc",
+  "catarratto",
+  "albarino",
+  "arneis",
+  "verdejo",
+  "vermentino",
+  "soave",
+  "pinot grigio",
+  "dry riesling",
+  "torrontes",
+  "gewurztraminer",
+  "chenin blanc",
+  "white bordeaux",
+  "semillon",
+  "riesling",
+  "sauternes",
+  "petite sirah",
+  "zweigelt",
+  "baco noir",
+  "bonarda",
+  "cabernet franc",
+  "barbera wine",
+  "primitivo",
+  "pinot noir",
+  "nebbiolo",
+  "dolcetto",
+  "tannat",
+  "negroamaro",
+  "red burgundy",
+  "rioja",
+  "cotes du rhone",
+  "grenache",
+  "malbec",
+  "zinfandel",
+  "sangiovese",
+  "carignan",
+  "carmenere",
+  "cesanese",
+  "cabernet sauvignon",
+  "aglianico",
+  "tempranillo",
+  "shiraz",
+  "mourvedre",
+  "merlot",
+  "nero d avola",
+  "bordeaux",
+  "port",
+  "gamay",
+  "dornfelder",
+  "concord wine",
+  "sparkling red wine",
+  "pinotage",
+  "agiorgitiko",
+  "moscato",
+  "late harvest",
+  "ice wine",
+  "white port",
+  "madeira",
+  "vin santo",
+  "champagne",
+  "prosecco",
+  "spumante",
+  "sparkling rose",
+  "sherry",
+  "dry vermouth",
+  "fruit wine",
+  "mead",
+]);
+
+ddocument.addEventListener("DOMContentLoaded", () => {
   document.querySelector("button").addEventListener("click", searchPairings);
 });
 
 async function searchPairings() {
-  const searchInput = document.getElementById("searchInput").value.trim();
+  const searchInput = document
+    .getElementById("searchInput")
+    .value.trim()
+    .toLowerCase();
   const resultsContainer = document.querySelector(".results-container");
 
   if (!searchInput) {
@@ -191,35 +299,32 @@ async function searchPairings() {
 
   resultsContainer.innerHTML = "<p class='text-gray-500'>Searching...</p>";
 
-  let isFood =
-    !searchInput.toLowerCase().includes("wine") &&
-    !searchInput.toLowerCase().includes("chardonnay") &&
-    !searchInput.toLowerCase().includes("merlot");
+  const isWine = wineList.has(searchInput);
 
-  let data, dishData, wineDescription;
+  let data;
+  let dishData;
+  let wineDescription;
 
-  if (isFood) {
-    data = await getWinePairing(searchInput);
-  } else {
+  if (isWine) {
     dishData = await getDishPairing(searchInput);
-    wineDescription = await getWineDescription(searchInput);
+    wineDescription = await getWineDescription(searchInput); // Obtener descripción del vino
+  } else {
+    data = await getWinePairing(searchInput);
   }
-
-  console.log("API Response:", { data, dishData, wineDescription }); // <-- Debugging log
 
   if (!data && !dishData && !wineDescription) {
     resultsContainer.innerHTML =
-      "<p class='text-red-500'>No pairings found. Try another search!</p>";
+      "<p class='text-red-500'>No results found. Try another search!</p>";
     return;
   }
 
   let output = "";
 
-  if (wineDescription) {
-    output += `<p class="text-lg font-semibold">${wineDescription.wineDescription}</p>`;
+  if (wineDescription && wineDescription.wineDescription) {
+    output += `<p class="text-lg font-semibold text-blue-600">${wineDescription.wineDescription}</p>`;
   }
 
-  if (data?.pairingText) {
+  if (data && data.pairingText) {
     output += `<p class="text-lg font-semibold">${data.pairingText}</p>`;
   }
 
@@ -232,43 +337,33 @@ async function searchPairings() {
     output += `</ul>`;
   }
 
-  if (data?.productMatches && data.productMatches.length > 0) {
+  if (data?.productMatches?.length > 0) {
     output += `<h3 class="text-xl font-semibold mt-4">Recommended Wine:</h3>`;
-
     data.productMatches.forEach((product) => {
-      const priceUSD = product.price
-        ? parseFloat(product.price.replace("$", ""))
-        : null;
-      const priceEUR = priceUSD ? (priceUSD * 0.92).toFixed(2) : "N/A"; // Conversión de USD a EUR
-      let wineImage =
-        product.imageUrl || "https://via.placeholder.com/150?text=No+Image";
-
+      const priceEUR = parseFloat(product.price.replace("$", "")) * 0.92;
       output += `
-        <div class="flex items-center gap-4 mt-4 p-4 border rounded-lg shadow">
-          <img src="${wineImage}" alt="${
+                <div class="flex items-center gap-4 mt-4 p-4 border rounded-lg shadow">
+                    <img src="${product.imageUrl}" alt="${
         product.title
       }" class="w-24 h-24 rounded">
-          <div>
-            <h4 class="text-lg font-semibold">${product.title} - 
-              <span class="text-green-600">€${priceEUR}</span>
-            </h4>
-            ${
-              product.description
-                ? `<p class="text-gray-700">${product.description}</p>`
-                : ""
-            }
-            <a href="${
-              product.link
-            }" target="_blank" class="text-blue-500 underline">Buy Here</a>
-          </div>
-        </div>
-      `;
+                    <div>
+                        <h4 class="text-lg font-semibold">${
+                          product.title
+                        } - <span class="text-green-600">€${priceEUR.toFixed(
+        2
+      )}</span></h4>
+                        <p class="text-gray-700">${product.description}</p>
+                        <a href="${
+                          product.link
+                        }" target="_blank" class="text-blue-500 underline">Buy Here</a>
+                    </div>
+                </div>
+            `;
     });
-  } else if (!wineDescription && !data?.pairingText) {
-    // Solo mostramos el mensaje si no hay absolutamente NADA
-    output +=
-      "<p class='text-red-500'>No wine recommendations found. Try another search!</p>";
   }
 
   resultsContainer.innerHTML = output;
 }
+
+// Permite que el botón llame a la función
+window.searchPairings = searchPairings;

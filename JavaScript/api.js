@@ -1,33 +1,25 @@
 const API_KEY = "9ee61f63c0f94253beca5a263c72b1dc";
 const BASE_URL = "https://api.spoonacular.com/food/wine";
 
-/**
- * Fetch dish pairings for a given wine
- */
-async function getDishPairing(wine) {
-  const url = `${BASE_URL}/dishes?wine=${wine}&apiKey=${API_KEY}`; // 🔥 Corrección aquí
-  return await fetchData(url);
-}
-
-/**
- * Fetch wine pairing for a given dish
- */
-async function getWinePairing(food) {
+/** Fetch wine pairing for a given dish */
+export async function getWinePairing(food) {
   const url = `${BASE_URL}/pairing?food=${food}&apiKey=${API_KEY}`;
   return await fetchData(url);
 }
 
-/**
- * Fetch wine description for a given wine type
- */
-async function getWineRecommendations(wine) {
-  const url = `${BASE_URL}/recommendation?wine=${wine}&number=10&apiKey=${API_KEY}`; // 🔥 Agregado number=10
+/** Fetch dish pairings for a given wine */
+export async function getDishPairing(wine) {
+  const url = `${BASE_URL}/dishes?wine=${wine}&apiKey=${API_KEY}`;
   return await fetchData(url);
 }
 
-/**
- * Generic function to fetch data from API
- */
+/** Fetch wine description */
+export async function getWineDescription(wine) {
+  const url = `${BASE_URL}/description?wine=${wine}&apiKey=${API_KEY}`;
+  return await fetchData(url);
+}
+
+/** Generic function to fetch data */
 async function fetchData(url) {
   try {
     const response = await fetch(url);
