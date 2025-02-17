@@ -331,46 +331,57 @@ async function searchPairings() {
     let output = "";
 
     if (wineDescription?.wineDescription) {
-      output += `<p class="text-lg font-semibold text-blue-600">${wineDescription.wineDescription}</p>`;
+      output += `
+  <div class="bg-wbg-gray-100  p-6 rounded-lg shadow-md mb-6">
+      <p class="text-[16px] font-weight: 500 text-[#333333] ">${wineDescription.wineDescription}</p>
+    </div>`;
     }
 
     if (data?.pairingText) {
-      output += `<p class="text-lg font-semibold">${data.pairingText}</p>`;
+      output += `
+    <div class="bg-gray-100 p-6 rounded-lg shadow-md mb-6">
+      <p class="text-[16px] font-weight: 500 text-gray-800">${data.pairingText}</p>
+    </div>`;
     }
 
     if (dishData?.pairings?.length > 0) {
-      output += `<h3 class="text-xl font-semibold mt-4">Dishes that go well with this wine:</h3>`;
-      output += `<ul class="list-disc pl-6">`;
+      output += `
+    <div class="bg-gray-100 p-6 rounded-lg shadow-md mb-4">
+      <h3 class="text-[16px] font-weight:500 text-[#333333]">Dishes that pair well with this wine:</h3>
+      <ul class="list-disc pl-6 mt-2">`;
       dishData.pairings.forEach((dish) => {
-        output += `<li class="text-purple-600">${dish}</li>`;
+        output += `<li class="text-gray-700">${dish}</li>`;
       });
-      output += `</ul>`;
-    } else if (isWine) {
-      output += `<p class="text-gray-600">No dish pairings found for this wine.</p>`;
+      output += `</ul></div>`;
     }
 
     if (data?.productMatches?.length > 0) {
-      output += `<h3 class="text-xl font-semibold mt-4">Recommended Wine:</h3>`;
+      output += `<div class="mt-6 flex flex-col space-y-6">`;
       data.productMatches.forEach((product) => {
         const priceEUR = parseFloat(product.price.replace("$", "")) * 0.92;
         output += `
-                <div class="flex items-center gap-4 mt-4 p-4 border rounded-lg shadow">
-                    <img src="${product.imageUrl}" alt="${
+      <div class="bg-gray-100  p-6 rounded-lg shadow-md flex items-center space-x-6">
+        <img src="${product.imageUrl}" alt="${
           product.title
-        }" class="w-24 h-24 rounded">
-                    <div>
-                        <h4 class="text-lg font-semibold">${product.title} - 
-                        <span class="text-green-600">€${priceEUR.toFixed(
-                          2
-                        )}</span></h4>
-                        <p class="text-gray-700">${product.description}</p>
-                        <a href="${
-                          product.link
-                        }" target="_blank" class="text-blue-500 underline">Buy Here</a>
-                    </div>
-                </div>
-            `;
+        }" class="w-40 h-40 object-cover rounded-lg">
+
+       <div class="flex flex-col">
+          <h4 class="text-[16px] font-semibold text-gray-900">${
+            product.title
+          }</h4>
+          <p class="text-green-600 font-semibold text-xl">€${priceEUR.toFixed(
+            2
+          )}</p>
+          <p class="text-gray-600 text-[14px] mt-2 max-w-lg">${
+            product.description
+          }</p>
+          <a href="${
+            product.link
+          }" target="_blank" class="mt-4 text-purple-600 font-medium underline">Buy Here</a>
+        </div>
+      </div>`;
       });
+      output += `</div>`;
     }
 
     resultsContainer.innerHTML = output;
