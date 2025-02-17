@@ -159,71 +159,8 @@
       </section>
     </main>
 
-    <!-- Contact Form Modal -->
-    <div
-      id="contactModal"
-      class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden z-50"
-    >
-      <div class="bg-white p-6 rounded-lg shadow-lg w-96">
-        <h2 class="text-xl font-bold mb-4">Contact Us</h2>
-        <form id="contactForm">
-          <div class="mb-4">
-            <label class="block text-sm font-medium">Name</label>
-            <input type="text" class="w-full p-2 border rounded" required />
-          </div>
-
-          <div class="mb-4">
-            <label class="block text-sm font-medium">Email</label>
-            <input type="email" class="w-full p-2 border rounded" required />
-          </div>
-
-          <div class="mb-4">
-            <label class="block text-sm font-medium">Message</label>
-            <textarea
-              class="w-full p-2 border rounded"
-              rows="4"
-              required
-            ></textarea>
-          </div>
-
-          <button
-            type="submit"
-            class="bg-yellow-500 text-white px-4 py-2 rounded-lg w-full"
-          >
-            Send
-          </button>
-        </form>
-        <button id="closeContactModal" class="mt-4 text-red-500">Close</button>
-      </div>
-    </div>
-
-    <!-- Success Modal -->
-    <div
-      id="successModal"
-      class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden z-50"
-    >
-      <div class="bg-white p-6 rounded-lg shadow-lg w-80 text-center">
-        <img
-          src="../images/zan-lazarevic-WrueFKpTlQs-unsplash.jpg"
-          alt="thanks"
-          class="w-25 h-25 mx-auto mb-2"
-        />
-        <h2 class="text-xl font-bold text-green-600">
-          Message Sent Successfully! ✅
-        </h2>
-        <p class="mt-2">
-          Thank you for reaching out. We'll get back to you soon.
-        </p>
-        <button
-          id="closeSuccessModal"
-          class="mt-4 bg-yellow-500 text-white px-4 py-2 rounded-lg"
-        >
-          OK
-        </button>
-      </div>
-    </div>
-
-    <script src="../JavaScript/index.js"></script>
+    <script type="module" src="../JavaScript/api.js"></script>
+    <script type="module" src="../JavaScript/index.js"></script>
     <div id="footer-container"></div>
   </body>
 </html>

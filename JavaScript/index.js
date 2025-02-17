@@ -12,7 +12,27 @@ fetch("navbar.html")
   })
   .catch((error) => console.error("Error loading navbar:", error));
 
-// Nav + open quiz + urls
+// Nav + open quiz  Images
+document.addEventListener("DOMContentLoaded", function () {
+  const imageContainer = document.querySelector(
+    ".flex.flex-wrap.gap-4.justify-center.mb-10.mt-10"
+  );
+  const images = Array.from(imageContainer.children);
+
+  // unorganized images
+  function shuffleImages(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  shuffleImages(images); // Desordenar imágenes
+
+  // Vaciar el contenedor y volver a insertar las imágenes en el nuevo orden
+  imageContainer.innerHTML = "";
+  images.forEach((img) => imageContainer.appendChild(img));
+});
 
 // Load Navbar and handle open-quiz
 fetch("navbar.html")
@@ -332,21 +352,21 @@ async function searchPairings() {
 
     if (wineDescription?.wineDescription) {
       output += `
-  <div class="bg-wbg-gray-100  p-6 rounded-lg shadow-md mb-6">
+  <div class="bg-gray-100  p-6 rounded-lg shadow-[#E4F1F9] mb-6">
       <p class="text-[16px] font-weight: 500 text-[#333333] ">${wineDescription.wineDescription}</p>
     </div>`;
     }
 
     if (data?.pairingText) {
       output += `
-    <div class="bg-gray-100 p-6 rounded-lg shadow-md mb-6">
+    <div class="bg-gray-100 p-6 rounded-lg  box-shadow ] mb-6">
       <p class="text-[16px] font-weight: 500 text-gray-800">${data.pairingText}</p>
     </div>`;
     }
 
     if (dishData?.pairings?.length > 0) {
       output += `
-    <div class="bg-gray-100 p-6 rounded-lg shadow-md mb-4">
+    <div class="bg-gray-100 p-6 rounded-l box-shadow  mb-6">
       <h3 class="text-[16px] font-weight:500 text-[#333333]">Dishes that pair well with this wine:</h3>
       <ul class="list-disc pl-6 mt-2">`;
       dishData.pairings.forEach((dish) => {
@@ -360,7 +380,7 @@ async function searchPairings() {
       data.productMatches.forEach((product) => {
         const priceEUR = parseFloat(product.price.replace("$", "")) * 0.92;
         output += `
-      <div class="bg-gray-100  p-6 rounded-lg shadow-md flex items-center space-x-6">
+      <div class="bg-gray-100  p-6  box-shadow  flex items-center space-x-6">
         <img src="${product.imageUrl}" alt="${
           product.title
         }" class="w-40 h-40 object-cover rounded-lg">
@@ -369,7 +389,7 @@ async function searchPairings() {
           <h4 class="text-[16px] font-semibold text-gray-900">${
             product.title
           }</h4>
-          <p class="text-green-600 font-semibold text-xl">€${priceEUR.toFixed(
+          <p class="text-green-600 text-[14px] font-semibold text-xl">€${priceEUR.toFixed(
             2
           )}</p>
           <p class="text-gray-600 text-[14px] mt-2 max-w-lg">${
