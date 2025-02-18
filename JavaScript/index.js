@@ -352,23 +352,27 @@ async function searchPairings() {
 
     if (wineDescription?.wineDescription) {
       output += `
-  <div class="bg-gray-100  p-6 rounded-lg shadow-[#E4F1F9] mb-6">
-      <p class="text-[16px] font-weight: 500 text-[#333333] ">${wineDescription.wineDescription}</p>
-    </div>`;
+  <div class="bg-gray-100  p-6 rounded-lg mb-6">
+     <p class="text-[16px] font-medium text-gray-800 whitespace-pre-line">${data.pairingText}</p>
+      </div>`;
     }
 
     if (data?.pairingText) {
       output += `
-    <div class="bg-gray-100 p-6 rounded-lg  box-shadow ] mb-6">
-      <p class="text-[16px] font-weight: 500 text-gray-800">${data.pairingText}</p>
-    </div>`;
+      <div class="bg-[#E4F1F9] p-6 rounded-lg mb-6">
+        <h3 class="text-[18px] font-semibold text-[#333333]">Dishes that pair well with this wine:</h3>
+        <ul class="list-disc pl-6 mt-2">`;
+      dishData.pairings.forEach((dish) => {
+        output += `<li class="text-gray-700">${dish}</li>`;
+      });
+      output += `</ul></div>`;
     }
 
     if (dishData?.pairings?.length > 0) {
       output += `
-    <div class="bg-gray-100 p-6 rounded-l box-shadow  mb-6">
-      <h3 class="text-[16px] font-weight:500 text-[#333333]">Dishes that pair well with this wine:</h3>
-      <ul class="list-disc pl-6 mt-2">`;
+        <div class="bg-[#E4F1F9] p-6 rounded-lg mb-6">
+        <h3 class="text-[18px] font-semibold text-[#333333]">Dishes that pair well with this wine:</h3>
+        <ul class="list-disc pl-6 mt-2">`;
       dishData.pairings.forEach((dish) => {
         output += `<li class="text-gray-700">${dish}</li>`;
       });
@@ -380,7 +384,7 @@ async function searchPairings() {
       data.productMatches.forEach((product) => {
         const priceEUR = parseFloat(product.price.replace("$", "")) * 0.92;
         output += `
-      <div class="bg-gray-100  p-6  box-shadow  flex items-center space-x-6">
+      <div class="bg-gray-100  p-6 flex items-center space-x-6">
         <img src="${product.imageUrl}" alt="${
           product.title
         }" class="w-40 h-40 object-cover rounded-lg">
@@ -415,3 +419,16 @@ async function searchPairings() {
 // Permite que el botón llame a la función
 window.searchPairings = searchPairings;
 export { searchPairings };
+
+//** landing signup form **//
+
+let currentIndex = 0;
+const slider = document.getElementById("slider");
+const slides = document.querySelectorAll("#slider img");
+
+function nextSlide() {
+  currentIndex = (currentIndex + 1) % slides.length;
+  slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+
+setInterval(nextSlide, 3000);
