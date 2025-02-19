@@ -5,12 +5,50 @@ window.onload = function () {
 };
 
 // Navbar
+("use strict");
+
+window.onload = function () {
+  window.scrollTo(0, 0);
+};
+
+// NAVBAR
 fetch("navbar.html")
   .then((response) => response.text())
   .then((data) => {
     document.getElementById("navbar").innerHTML = data;
+
+    // DOM
+    setTimeout(() => {
+      // Hambureguesa BTN
+      const hamburgerBtn = document.getElementById("hamburger-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const closeMenu = document.getElementById("close-menu");
+
+      if (hamburgerBtn && mobileMenu && closeMenu) {
+        hamburgerBtn.addEventListener("click", () => {
+          mobileMenu.classList.toggle("-translate-x-full");
+        });
+
+        closeMenu.addEventListener("click", () => {
+          mobileMenu.classList.add("-translate-x-full");
+        });
+      } else {
+        console.error("❌ Elementos del menú hamburguesa no encontrados.");
+      }
+
+      // Sign up BTN
+      const signupButton = document.getElementById("signup-button");
+      if (signupButton) {
+        signupButton.addEventListener("click", () => {
+          console.log("📌 Redirigiendo a: signup.html");
+          window.location.href = "signup.html";
+        });
+      } else {
+        console.error("❌ Botón Sign Up no encontrado.");
+      }
+    }, 100);
   })
-  .catch((error) => console.error("Error loading navbar:", error));
+  .catch((error) => console.error("Error cargando el navbar:", error));
 
 // Nav + open quiz  Images
 document.addEventListener("DOMContentLoaded", function () {
@@ -98,21 +136,6 @@ function setupNavigation() {
 
 // call function to add event listeners for navigation
 document.addEventListener("DOMContentLoaded", setupNavigation);
-
-//NAV hamburguesa
-const toggleMenu = (element, className) => element.classList.toggle(className);
-document.addEventListener("DOMContentLoaded", () => {
-  const hamburgerBtn = document.getElementById("hamburger-btn");
-  const mobileMenu = document.getElementById("mobile-menu");
-  const closeMenu = document.getElementById("close-menu");
-
-  hamburgerBtn?.addEventListener("click", () =>
-    toggleMenu(mobileMenu, "-translate-x-full")
-  );
-  closeMenu?.addEventListener("click", () =>
-    mobileMenu.classList.add("-translate-x-full")
-  );
-});
 
 // Footer
 document.addEventListener("DOMContentLoaded", () => {
@@ -463,24 +486,3 @@ function nextSlide() {
 }
 
 setInterval(nextSlide, 3000);
-
-//** Nav + signup btn**//
-
-fetch("navbar.html")
-  .then((response) => response.text())
-  .then((data) => {
-    document.getElementById("navbar").innerHTML = data;
-
-    setTimeout(() => {
-      const signupButton = document.getElementById("signup-button");
-      if (signupButton) {
-        signupButton.addEventListener("click", () => {
-          console.log("📌 Redirigiendo a: signup.html");
-          window.location.href = "signup.html";
-        });
-      } else {
-        console.error("❌ Botón Sign Up no encontrado");
-      }
-    }, 100);
-  })
-  .catch((error) => console.error("Error cargando el navbar:", error));

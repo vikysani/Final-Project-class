@@ -21,7 +21,7 @@ main {
   position: relative;
 }
 
-/* Ajustar los submenús */
+/* submebu ul */
 .navbar ul {
   position: absolute;
   top: 100%;
@@ -40,7 +40,7 @@ main {
   justify-content: flex-start;
 }
 
-/* visible menu with cursor */
+/* hover submenu */
 .navbar li:hover > ul,
 .navbar ul:hover {
   display: flex;
@@ -49,7 +49,7 @@ main {
   flex-direction: column;
 }
 
-/* submenú */
+/* submenu ul-li */
 .navbar ul li {
   padding: 8px;
   white-space: nowrap;
@@ -210,6 +210,21 @@ main {
 
 .image-slide {
   animation: slideInRight 1s ease-out forwards;
+}
+
+/* small screens */
+@media (max-width: 768px) {
+  .image-slide {
+    animation: none; /* inactive small la animación en pantallas pequeñas */
+    transform: none; /* Resetea cualquier transformación aplicada */
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image-slide {
+    animation: none;
+    transform: none;
+  }
 }
 
 /* Pair beer effect*/

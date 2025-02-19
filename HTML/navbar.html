@@ -32,6 +32,45 @@
         </svg>
       </button>
 
+      <!-- Mobile Menu (Hidden by default) -->
+      <div
+        id="mobile-menu"
+        class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-90 z-50 transform -translate-x-full transition-transform duration-300 ease-in-out lg:hidden"
+      >
+        <button
+          id="close-menu"
+          class="absolute top-4 right-4 text-white text-3xl"
+        >
+          &times;
+        </button>
+        <ul
+          class="flex flex-col items-center justify-center h-full space-y-6 text-white"
+        >
+          <li>
+            <a href="#" class="text-lg hover:text-yellow-500">About Us</a>
+          </li>
+          <li>
+            <a
+              href="../HTML/search_wine.html"
+              class="text-lg hover:text-yellow-500"
+              >Wine Pairing</a
+            >
+          </li>
+          <li>
+            <a
+              href="../HTML/search_beer.html"
+              class="text-lg hover:text-yellow-500"
+              >Beer Pairing</a
+            >
+          </li>
+          <li>
+            <a href="../HTML/signup.html" class="text-lg hover:text-yellow-500"
+              >Sign Up</a
+            >
+          </li>
+        </ul>
+      </div>
+
       <!-- Navigation Links -->
       <ul class="navbar hidden lg:flex space-x-6 gap-10 md:hidden">
         <!-- About Us -->
