@@ -87,36 +87,65 @@ document.addEventListener("DOMContentLoaded", () => {
   observer.observe(heroSection);
 });
 
-//** Modal handling **//
+//** Modal */
 document.addEventListener("DOMContentLoaded", function () {
-  const contactModal = document.getElementById("contactModal");
-  const successModal = document.getElementById("successModal");
+  function initializeModal() {
+    console.log("Initializing modal...");
 
-  document.addEventListener("click", function (event) {
-    if (event.target.id === "openModal") {
-      contactModal.classList.remove("hidden");
-    }
-    if (event.target.id === "closeContactModal") {
-      contactModal.classList.add("hidden");
-    }
-    if (event.target.id === "closeSuccessModal") {
-      successModal.classList.add("hidden");
+    const contactModal = document.getElementById("contactModal");
+    const successModal = document.getElementById("successModal");
+    const contactForm = document.getElementById("contactForm");
+
+    if (!contactModal || !successModal || !contactForm) {
+      console.error("Some modal elements not found!");
+      return;
     }
 
-    if (event.target === contactModal) {
-      contactModal.classList.add("hidden");
-    }
-    if (event.target === successModal) {
-      successModal.classList.add("hidden");
-    }
-  });
+    document.addEventListener("click", function (event) {
+      if (event.target.id === "openModal") {
+        contactModal.classList.remove("hidden");
+      }
+      if (event.target.id === "closeContactModal") {
+        contactModal.classList.add("hidden");
+      }
+      if (event.target.id === "closeSuccessModal") {
+        successModal.classList.add("hidden");
+      }
+      if (event.target === contactModal) {
+        contactModal.classList.add("hidden");
+      }
+      if (event.target === successModal) {
+        successModal.classList.add("hidden");
+      }
+    });
 
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      contactModal.classList.add("hidden");
-      successModal.classList.add("hidden");
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        contactModal.classList.add("hidden");
+        successModal.classList.add("hidden");
+      }
+    });
+
+    // ✅ Handle form submission
+    contactForm.addEventListener("submit", function (event) {
+      event.preventDefault(); // Prevents page reload
+      console.log("Form submitted!");
+
+      contactModal.classList.add("hidden"); // Hide contact modal
+      successModal.classList.remove("hidden"); // Show success modal
+
+      // Optional: Reset form
+      contactForm.reset();
+    });
+  }
+
+  // Wait for footer to be loaded
+  const checkFooter = setInterval(() => {
+    if (document.getElementById("contactModal")) {
+      clearInterval(checkFooter);
+      initializeModal();
     }
-  });
+  }, 100);
 });
 
 //** Search with Enter key **//
