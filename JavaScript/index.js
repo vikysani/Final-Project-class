@@ -22,7 +22,7 @@ function loadComponent(containerId, filePath, callback) {
     .then((response) => response.text())
     .then((data) => {
       document.getElementById(containerId).innerHTML = data;
-      if (callback) callback(); // Ejecuta callback si existe
+      if (callback) callback(); //
     })
     .catch((error) => console.error(`Error al cargar ${filePath}:`, error));
 }
@@ -229,13 +229,14 @@ window.searchPairings = searchPairings;
 export { searchPairings };
 
 //** Landing page signup form (Slider) **//
-let currentIndex = 0;
-const slider = document.getElementById("slider");
-const slides = document.querySelectorAll("#slider img");
+document.addEventListener("DOMContentLoaded", () => {
+  let currentIndex = 0;
+  const slider = document.getElementById("slider");
 
-function nextSlide() {
-  currentIndex = (currentIndex + 1) % slides.length;
-  slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-}
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % slider.children.length;
+    slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+  }
 
-setInterval(nextSlide, 3000);
+  setInterval(nextSlide, 3000);
+});
