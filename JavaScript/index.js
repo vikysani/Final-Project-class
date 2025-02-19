@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   shuffleImages(images); // Desordenar imágenes
 
-  // Vaciar el contenedor y volver a insertar las imágenes en el nuevo orden
   imageContainer.innerHTML = "";
   images.forEach((img) => imageContainer.appendChild(img));
 });
@@ -125,15 +124,47 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch((error) => console.error("Error al cargar el footer:", error));
 });
 
-//Hearts
+//** Hearts
 document.addEventListener("DOMContentLoaded", () => {
   const hearts = document.querySelectorAll(".heart");
-  hearts.forEach((heart, index) => {
-    setTimeout(() => {
-      heart.classList.add("visible");
-      heart.style.zIndex = 5;
-    }, index * 500);
-  });
+  const heroSection = document.querySelector(".hero");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (entries[0].isIntersecting) {
+        hearts.forEach((heart, index) => {
+          setTimeout(() => {
+            heart.classList.add("visible");
+          }, index * 500);
+        });
+      } else {
+        hearts.forEach((heart) => heart.classList.remove("visible")); // Se ocultan si sale de la vista
+      }
+    },
+    { threshold: 0.5 }
+  );
+
+  observer.observe(heroSection);
+});
+
+//images hero
+document.addEventListener("DOMContentLoaded", () => {
+  const image = document.querySelector(".image-slide");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          image.classList.add("image-slide");
+        } else {
+          image.classList.remove("image-slide"); // Se remueve cuando sale de la vista
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  observer.observe(image);
 });
 
 //**Modal**//
@@ -432,3 +463,24 @@ function nextSlide() {
 }
 
 setInterval(nextSlide, 3000);
+
+//** Nav + signup btn**//
+
+fetch("navbar.html")
+  .then((response) => response.text())
+  .then((data) => {
+    document.getElementById("navbar").innerHTML = data;
+
+    setTimeout(() => {
+      const signupButton = document.getElementById("signup-button");
+      if (signupButton) {
+        signupButton.addEventListener("click", () => {
+          console.log("📌 Redirigiendo a: signup.html");
+          window.location.href = "signup.html";
+        });
+      } else {
+        console.error("❌ Botón Sign Up no encontrado");
+      }
+    }, 100);
+  })
+  .catch((error) => console.error("Error cargando el navbar:", error));
