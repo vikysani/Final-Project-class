@@ -4,65 +4,24 @@ window.onload = function () {
   window.scrollTo(0, 0);
 };
 
-// Función para determinar la ruta correcta
-function getRelativePath(file) {
-  const depth = window.location.pathname.split("/").length - 1;
-  return depth > 1 ? `../html/${file}` : `html/${file}`;
-}
+// Nav + open quiz Images
+const imageContainer = document.querySelector(
+  ".flex.flex-wrap.gap-4.justify-center.mb-10.mt-10"
+);
+const images = Array.from(imageContainer.children);
 
-// NAVBAR & FOOTER
-document.addEventListener("DOMContentLoaded", () => {
-  loadComponent("navbar", "navbar.html", setupNavigation);
-  loadComponent("footer-container", "footer.html");
-});
-
-// components (Navbar & Footer)
-function loadComponent(containerId, filePath, callback) {
-  fetch(getRelativePath(filePath))
-    .then((response) => response.text())
-    .then((data) => {
-      document.getElementById(containerId).innerHTML = data;
-      if (callback) callback(); //
-    })
-    .catch((error) => console.error(`Error al cargar ${filePath}:`, error));
-}
-
-// After upload navbar
-function setupNavigation() {
-  // hamburguesa
-  const hamburgerBtn = document.getElementById("hamburger-btn");
-  const mobileMenu = document.getElementById("mobile-menu");
-  const closeMenu = document.getElementById("close-menu");
-
-  if (hamburgerBtn && mobileMenu && closeMenu) {
-    hamburgerBtn.addEventListener("click", () => {
-      mobileMenu.classList.toggle("-translate-x-full");
-    });
-
-    closeMenu.addEventListener("click", () => {
-      mobileMenu.classList.add("-translate-x-full");
-    });
+// Unorganized images
+function shuffleImages(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
   }
-
-  // Nav + open quiz Images
-  const imageContainer = document.querySelector(
-    ".flex.flex-wrap.gap-4.justify-center.mb-10.mt-10"
-  );
-  const images = Array.from(imageContainer.children);
-
-  // Unorganized images
-  function shuffleImages(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-  }
-
-  shuffleImages(images); // Desordenar imágenes
-
-  imageContainer.innerHTML = "";
-  images.forEach((img) => imageContainer.appendChild(img));
 }
+
+shuffleImages(images); // Desordenar imágenes
+
+imageContainer.innerHTML = "";
+images.forEach((img) => imageContainer.appendChild(img));
 
 //** Hearts
 document.addEventListener("DOMContentLoaded", () => {
@@ -163,80 +122,40 @@ document.addEventListener("DOMContentLoaded", () => {
   searchButton.addEventListener("click", searchPairings);
 });
 
-//* API *//
-import { getDishPairing, getWinePairing, getWineDescription } from "./api.js";
+//** landing signup form **//
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelector("button").addEventListener("click", searchPairings);
-});
+let currentIndex = 0;
+const slider = document.getElementById("slider");
+const slides = document.querySelectorAll("#slider img");
 
-async function searchPairings() {
-  const searchInput = document
-    .getElementById("searchInput")
-    .value.trim()
-    .toLowerCase();
-  const resultsContainer = document.querySelector(".results-container");
-
-  if (!searchInput) {
-    resultsContainer.innerHTML =
-      "<p class='text-red-500'>Please enter a food or wine!</p>";
-    return;
-  }
-
-  resultsContainer.innerHTML = "<p class='text-gray-500'>Searching...</p>";
-
-  const formattedQuery = searchInput.replace(/ /g, "_");
-  const isWine = wineList.has(formattedQuery);
-
-  console.log("🔍 Buscando:", formattedQuery);
-  console.log("🍷 Es un vino?:", isWine);
-
-  try {
-    let data = null;
-    let dishData = null;
-    let wineDescription = null;
-
-    if (isWine) {
-      dishData = await getDishPairing(formattedQuery);
-      wineDescription = await getWineDescription(formattedQuery);
-    } else {
-      data = await getWinePairing(formattedQuery);
-    }
-
-    if (!data && !dishData && !wineDescription) {
-      resultsContainer.innerHTML =
-        "<p class='text-red-500'>No results found. Try another search!</p>";
-      return;
-    }
-
-    let output = "";
-
-    if (wineDescription?.wineDescription) {
-      output += `<div class="bg-gray-100 p-6 rounded-lg mb-6">
-        <p class="text-[16px] font-medium text-gray-800 whitespace-pre-line">${data.pairingText}</p>
-      </div>`;
-    }
-
-    resultsContainer.innerHTML = output;
-  } catch (error) {
-    console.error("❌ Error fetching wine pairing:", error);
-    resultsContainer.innerHTML =
-      "<p class='text-red-500'>Error fetching results. Please try again.</p>";
-  }
+function nextSlide() {
+  currentIndex = (currentIndex + 1) % slides.length;
+  slider.style.transform = `translateX(-${currentIndex * 100}%)`;
 }
+
+setInterval(nextSlide, 3000);
 
 window.searchPairings = searchPairings;
 export { searchPairings };
 
 //** Landing page signup form (Slider) **//
 document.addEventListener("DOMContentLoaded", () => {
-  let currentIndex = 0;
   const slider = document.getElementById("slider");
 
-  function nextSlide() {
-    currentIndex = (currentIndex + 1) % slider.children.length;
-    slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-  }
+  if (slider) {
+    let currentIndex = 0;
 
-  setInterval(nextSlide, 3000);
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % slider.children.length;
+      slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    setInterval(nextSlide, 3000);
+  } else {
+    console.log("🔹 No slider found, skipping slider script.");
+  }
 });
+
+console.log("✅ index.js se está ejecutando!");
+import * as api from "./api.js";
+console.log(api);

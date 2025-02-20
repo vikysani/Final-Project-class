@@ -18,17 +18,15 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body class="bg-gray-100">
-    <header>
-      <div id="navbar"></div>
-    </header>
+    <header></header>
     <main
       class="flex flex-col items-center justify-center px-8 sm:px-12 lg:px-[200px] mt-12"
     >
       <img
-        src="../images/Website-Banner-for-wine-tasting.jpg"
+        src="/images/Website-Banner-for-wine-tasting.jpg"
         alt="wine w-full max-w-4xl"
         class="banner-search"
       />
@@ -42,14 +40,13 @@
 
       <div class="flex w-full max-w-xl mt-14 mb-14 input-wrapper">
         <input
-          id="searchInput"
+          id="clearInput"
           type="text"
           placeholder="Search by wine or food"
           class="w-full h-12 p-3 border border-gray-500 rounded-l-lg focus:outline-none focus:border-purple-600 transition"
         />
         <button
           id="clearInput"
-          onclick="searchPairings()"
           class="clear-btn bg-[#4C1D5A] text-[#F5F5F5] px-6 h-12 rounded-r-lg hover:bg-purple-800 transition-transform transform hover:scale-105"
         >
           Search
@@ -57,10 +54,5 @@
       </div>
       <div class="results-container"></div>
     </main>
-
-    <script type="module" src="../javascript/api.js"></script>
-    <script type="module" src="../javascript/index.js"></script>
-
-    <div id="footer-container"></div>
   </body>
 </html>

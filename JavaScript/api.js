@@ -1,4 +1,4 @@
-const API_KEY = "9ee61f63c0f94253beca5a263c72b1dc";
+const API_KEY = "d34a1508516d4dea8096536a3dff0399";
 const BASE_URL = "https://api.spoonacular.com/food/wine";
 
 /** Fetch wine pairing for a given dish */
@@ -32,3 +32,5 @@ async function fetchData(url) {
     return null;
   }
 }
+
+console.log("✅ api.js y index.js cargados correctamente");
