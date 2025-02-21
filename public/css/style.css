@@ -232,6 +232,10 @@ main {
   font-weight: bold;
 }
 
+.p-sign {
+  font-family: "DM Sans", serif;
+  font-size: 14px;
+}
 .hop-btn {
   display: inline-flex;
   align-items: center;
@@ -323,12 +327,6 @@ main {
 
 .banner-beer {
   box-shadow: 10px 8px 8px 0px #54471e;
-  border-radius: 8px;
-}
-
-/* Search API respnse */
-.box-shadow {
-  box-shadow: 10px 8px 8px 0px #aab0c0;
   border-radius: 8px;
 }
 

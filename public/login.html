@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log in</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body class="bg-gray-100">
+    <header>
+      <nav class="bg-black text-white">
+        <div class="container mx-auto grid place-items-center px-4 py-2">
+          <!-- Logo -->
+          <div>
+            <a href="/index.html">
+              <img
+                src="/images/pair my reduce in black bg.png"
+                alt="Pair My Drink Logo"
+                class="h-12"
+              />
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="flex justify-center items-center">
+      <!
+
+      <!-- Image Section -->
+      <div class="relative w-2/3 max-w-lg mt-20">
+        <img
+          src="/images/vino_cocina.jpg"
+          alt="bar"
+          class="w-full w-[100] h-[500px] object-cover rounded-lg shadow-lg opacity-75"
+        />
+      </div>
+
+      <!-- Form Section -->
+      <div class="relative ml-[-150px] mt-20">
+        <div class="bg-black text-white p-10 rounded-lg w-[450px] shadow-xl">
+          <h2 class="text-2xl font-bold mb-4 text-center">Welcome</h2>
+          <p class="text-center mb-6 text-gray-300">Nice to see you again!</p>
+
+          <form>
+            <label class="block mb-3">
+              <input
+                type="email"
+                placeholder="Email"
+                class="w-full p-3 border rounded text-black text-lg"
+              />
+            </label>
+
+            <label class="block mb-3">
+              <input
+                type="password"
+                placeholder="Password"
+                class="w-full p-3 border rounded text-black text-lg"
+              />
+              <span class="text-[14px] text-gray-300 block mt-2"
+                >*Password must be 8-64 characters long</span
+              >
+            </label>
+
+            <button
+              type="submit"
+              class="w-full bg-[#7F1B67] text-white text-lg py-3 rounded hover:bg-[#0E5883] mt-4"
+            >
+              Log In
+            </button>
+          </form>
+
+          <div class="mt-4 text-center">
+            <a href="#" class="text-gray-300 hover:text-white text-sm"
+              >Forgot your password?</a
+            >
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="/javascript/index.js"></script>
+  </body>
+</html>
