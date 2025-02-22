@@ -143,3 +143,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   shuffleImages(); // Llamar a la función al cargar la página
 });
+
+//**Clean forms radio option */
+
+window.addEventListener("load", function () {
+  // Selecciona todos los inputs de tipo radio en todos los formularios
+  const radios = document.querySelectorAll('form input[type="radio"]');
+  radios.forEach((radio) => {
+    radio.checked = false; // Desmarca cada radio button
+  });
+});
