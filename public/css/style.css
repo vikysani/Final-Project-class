@@ -11,9 +11,11 @@ main {
   margin: 0 auto;
 }
 
+.hero {
+  background: #f1f1f1;
+}
 .p-hero {
   font-family: "DM Sans", serif;
-  font-size: 16px;
 }
 
 /* navbar */
@@ -150,21 +152,21 @@ main {
 .heart1 {
   width: 90px;
   top: 40px;
-  right: 320px;
+  right: 380px;
   animation-delay: 0.5s;
 }
 
 .heart2 {
   width: 70px;
   top: 90px;
-  right: 325px;
+  right: 375px;
   animation-delay: 1s;
 }
 
 .heart3 {
   width: 65px;
   top: 120px;
-  right: 310px;
+  right: 360px;
   animation-delay: 1.5s;
 }
 
@@ -197,8 +199,7 @@ main {
 }
 
 .image-slide {
-  width: 90%;
-  max-width: 450px;
+  width: 100%;
   animation: slideInRight 1s ease-out forwards;
   position: relative;
   right: -50px;
@@ -398,4 +399,10 @@ main {
   padding: 8px;
   border-radius: 8px;
   transition: all 0.3s ease;
+}
+
+/** wine search API **/
+#wineRecommendations {
+  margin-left: 0; /* Asegura que no tenga desplazamiento */
+  max-width: 640px; /* O el mismo ancho que Wine Description */
 }
