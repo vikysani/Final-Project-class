@@ -261,7 +261,7 @@ main {
   background: linear-gradient(135deg, #06314b, #0e5883);
 }
 
-/** Form */
+/** Form wine */
 
 .food-img {
   width: 120px;
@@ -463,6 +463,46 @@ input:checked + .wine-content::before {
 
 /** wine search API **/
 #wineRecommendations {
-  margin-left: 0; /* Asegura que no tenga desplazamiento */
-  max-width: 640px; /* O el mismo ancho que Wine Description */
+  margin-left: 0;
+  max-width: 640px;
+}
+
+/** form beer dropdown */
+.dropdown-beer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 500px;
+}
+
+select {
+  color: #bda522;
+  background-color: whitesmoke;
+  border: 2px solid #bda522;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.3s;
+  width: 500px;
+  margin-top: 16px;
+}
+
+select:focus {
+  border-color: #bda522;
+}
+
+#beer-type {
+  padding: 12px 18px;
+  font-family: "DM Sans", serif;
+}
+
+.beer-text {
+  font-family: "Montserrat", serif;
+}
+
+.beer-img {
+  width: 160px;
+  height: auto;
 }

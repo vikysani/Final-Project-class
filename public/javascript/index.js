@@ -410,3 +410,9 @@ async function handleSearch() {
 }
 
 document.getElementById("searchButton").addEventListener("click", handleSearch);
+
+//* Form beer */
+document.addEventListener("DOMContentLoaded", function () {
+  const beerSelect = document.getElementById("beer-type");
+  beerSelect.selectedIndex = 0; // Siempre vuelve a "Select your beer"
+});

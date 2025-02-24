@@ -114,7 +114,7 @@
                 Wine Pairing <span class="ml-2 text-xl">&#9662;</span>
               </a>
               <ul
-                class="absolute hidden group-hover:block text-white mt-2 rounded w-96 p-4 p-6 pb-10"
+                class="absolute hidden group-hover:block text-white mt-2 rounded w-96 p-6 pb-10"
               >
                 <li>
                   <a
@@ -204,6 +204,13 @@
     </header>
 
     <main class="px-8 sm:px-12 lg:px-[200px] min-h-screen">
+      <div class="flex justify-center mt-6">
+        <div class="flex space-x-8 text-md font-semibold text-gray-600">
+          <div class="step text-gray-500" id="step1">🍺 Preferences</div>
+          <div class="step text-gray-500" id="step2">🍔 Pairing</div>
+          <div class="step text-gray-500" id="step3">🍻 Recommendation</div>
+        </div>
+      </div>
       <div class="max-w-4xl mx-auto p-10 bg-white rounded-lg shadow-md mt-10">
         <h1
           class="text-2xl sm:text-md md:text-lg lg:text-2xl xl:text-2xl font-bold text-center mb-6 mt-10"
@@ -213,120 +220,60 @@
 
         <form id="pairingForm" class="space-y-6">
           <div class="question mb-8" id="question1">
-            <h2 class="text-lg font-bold mb-4 border-b pb-2">
+            <p class="text-lg font-bold mb-4 pb-2">
               What type of beer do you prefer?
-            </h2>
-            <div class="grid grid-cols-2 gap-6 mt-4">
-              <label class="beer-option"
-                ><input type="radio" name="beer-type" value="lager" /><span
-                  class="beer-name"
-                  title="Crisp, refreshing, light-bodied Lager."
-                  >Lager</span
-                ></label
+            </p>
+
+            <div class="dropdown-beer">
+              <label for="beer-option" class="beer-text"
+                >Select one option:</label
               >
-              <label class="beer-option"
-                ><input type="radio" name="beer-type" value="ipa" /><span
-                  class="beer-name"
-                  title="Bold, hoppy, and strong bitterness IPA."
-                  >IPA</span
-                ></label
-              >
-              <label class="beer-option"
-                ><input type="radio" name="beer-type" value="stout" /><span
-                  class="beer-name"
-                  title="Dark, rich, with coffee or chocolate flavors Stout."
-                  >Stout</span
-                ></label
-              >
-              <label class="beer-option"
-                ><input type="radio" name="beer-type" value="pilsner" /><span
-                  class="beer-name"
-                  title="Crisp, dry, with a light bitterness Pilsner."
-                  >Pilsner</span
-                ></label
-              >
-              <label class="beer-option"
-                ><input type="radio" name="beer-type" value="bock" /><span
-                  class="beer-name"
-                  data-description="Strong, malty, with caramel and dark fruit notes Bock."
-                  >Bock</span
-                ></label
-              >
-              <label class="beer-option"
-                ><input type="radio" name="beer-type" value="saison" /><span
-                  class="beer-name"
-                  data-description="Spicy, fruity, with a slight acidity Saison."
-                  >Saison</span
-                ></label
-              >
-              <label class="beer-option"
-                ><input type="radio" name="beer-type" value="blonde-ale" /><span
-                  class="beer-name"
-                  data-description="Light, smooth, with a subtle malt flavor Blonde Ale."
-                  >Blonde Ale</span
-                ></label
-              >
-              <label class="beer-option"
-                ><input type="radio" name="beer-type" value="porter" /><span
-                  class="beer-name"
-                  data-description="Dark, smooth, with chocolate and caramel notes Porter."
-                  >Porter</span
-                ></label
-              >
-              <label class="beer-option"
-                ><input type="radio" name="beer-type" value="wheat" /><span
-                  class="beer-name"
-                  data-description="Smooth, cloudy, with hints of banana and clove Wheat Beer."
-                  >Wheat Beer</span
-                ></label
-              >
-              <label class="beer-option"
-                ><input type="radio" name="beer-type" value="amber" /><span
-                  class="beer-name"
-                  data-description="Balanced, malty, with caramel flavors Amber Ale."
-                  >Amber Ale</span
-                ></label
-              >
-              <label class="beer-option"
-                ><input type="radio" name="beer-type" value="tripel" /><span
-                  class="beer-name"
-                  data-description="Strong, spicy, with fruity notes Belgian Tripel."
-                  >Belgian Tripel</span
-                ></label
-              >
-              <label class="beer-option"
-                ><input type="radio" name="beer-type" value="dubbel" /><span
-                  class="beer-name"
-                  data-description="Rich, malty, with dark fruit flavors Belgian Dubbel."
-                  >Belgian Dubbel</span
-                ></label
-              >
-              <label class="beer-option"
-                ><input type="radio" name="beer-type" value="gose" /><span
-                  class="beer-name"
-                  data-description="Tart, salty, with citrus notes Gose."
-                  >Gose</span
-                ></label
-              >
-              <label class="beer-option"
-                ><input type="radio" name="beer-type" value="sour" /><span
-                  class="beer-name"
-                  data-description="Tart, funky, with wild yeast character Sour Ale."
-                  >Sour Ale</span
-                ></label
-              >
-              <label class="beer-option"
-                ><input type="radio" name="beer-type" value="barleywine" /><span
-                  class="beer-name"
-                  data-description="Strong, malty, with intense caramel and fruit notes Barleywine."
-                  >Barleywine</span
-                ></label
-              >
-              <label class="beer-option"
-                ><input type="radio" name="beer-type" value="surprise" /><span
-                  >Surprise Me!</span
-                ></label
-              >
+              <select name="drop" id="beer-type">
+                <option value="" disabled selected>Select your beer:</option>
+                <option value="lager">
+                  Lager: Crisp, refreshing, light-bodied.
+                </option>
+                <option value="ipa">
+                  IPA: Bold, hoppy, and strong bitterness.
+                </option>
+                <option value="stout">
+                  Stout: Dark, rich, with coffee or chocolate flavors.
+                </option>
+                <option value="pilsner">
+                  Pilsner: Crisp, dry, with a light bitterness.
+                </option>
+                <option value="bock">
+                  Bock: Strong, malty, with caramel and dark fruit notes.
+                </option>
+                <option value="porter">
+                  Porter: Dark, smooth, with chocolate and caramel notes.
+                </option>
+                <option value="blonde">
+                  Blonde Ale: Light, smooth, with a subtle malt flavor.
+                </option>
+                <option value="wheat">
+                  Wheat Beer: Smooth, cloudy, with hints of banana and clove.
+                </option>
+                <option value="amber">
+                  Amber Ale: Balanced, malty, with caramel flavor.
+                </option>
+                <option value="tripel">
+                  Belgian Tripel: Strong, spicy, with fruity notes Belgian
+                  Tripel.
+                </option>
+                <option value="dubbel">
+                  Belgian Dubbel: Strong, spicy, with fruity notes Belgian
+                  Tripel
+                </option>
+                <option value="gose">
+                  Gose: Tart, salty, with citrus note.
+                </option>
+                <option value="barleywine">
+                  Barley Wine: Strong, malty, with intense caramel and fruit
+                  notes.
+                </option>
+                <option value="surprise">Just surprise me!</option>
+              </select>
             </div>
           </div>
 
@@ -363,6 +310,17 @@
             <h2 class="text-lg font-bold mb-4 border-b pb-2">
               What type of food are you looking to pair?
             </h2>
+
+            <div class="flex flex-wrap gap-4 justify-center mb-12 mt-4">
+              <img src="/images/cheesse.jpg" class="food-img random-offset" />
+              <img
+                src="/images/medium-rare-steak.jpg"
+                class="food-img random-offset"
+              />
+              <img src="/images/pasta.jpg" class="food-img random-offset" />
+              <img src="/images/seafood.jpg" class="food-img random-offset" />
+              <img src="/images/spicy2.png" class="food-img random-offset" />
+            </div>
             <div class="flex flex-col gap-4">
               <label class="beer-option"
                 ><input type="radio" name="food-pairing" value="spicy" /><span>
