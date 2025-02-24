@@ -21,7 +21,187 @@
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body class="bg-gray-100">
-    <header></header>
+    <header>
+      <nav class="bg-black text-white">
+        <div
+          class="container mx-auto flex items-center justify-between px-4 py-2"
+        >
+          <!-- Logo -->
+          <div>
+            <a href="/index.html">
+              <img
+                src="/images/pair my reduce in black bg.png"
+                alt="Pair My Drink Logo"
+                class="h-12"
+              />
+            </a>
+          </div>
+
+          <!-- Hamburger Menu Button -->
+          <button id="hamburger-btn" class="lg:hidden focus:outline-none">
+            <svg
+              class="w-8 h-8 text-white"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4 6h16M4 12h16m-7 6h7"
+              ></path>
+            </svg>
+          </button>
+
+          <!-- Mobile Menu (Hidden by default) -->
+          <div
+            id="mobile-menu"
+            class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-100 z-50 transform -translate-x-full transition-transform duration-300 ease-in-out lg:hidden"
+          >
+            <button
+              id="close-menu"
+              class="absolute top-4 right-4 text-white text-3xl"
+            >
+              &times;
+            </button>
+            <ul
+              class="flex flex-col items-center justify-center h-full space-y-6 text-white"
+            >
+              <li>
+                <a href="#" class="text-lg hover:text-yellow-500">About Us</a>
+              </li>
+              <li>
+                <a
+                  href="/search_wine.html"
+                  class="text-lg hover:text-yellow-500"
+                  >Wine Pairing</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/search_beer.html"
+                  class="text-lg hover:text-yellow-500"
+                  >Beer Pairing</a
+                >
+              </li>
+              <li>
+                <a href="/signup.html" class="text-lg hover:text-yellow-500"
+                  >Sign Up</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Navigation Links -->
+          <ul class="navbar hidden lg:flex space-x-6 gap-10 md:hidden">
+            <!-- About Us -->
+            <li>
+              <a
+                href="#"
+                class="sm:text-sm md:text-sm lg:text-[14] xl:text-[14] hover:text-yellow-500"
+                >About Us</a
+              >
+            </li>
+
+            <!-- Wine Pairing -->
+            <li class="relative group">
+              <a
+                href="#"
+                class="sm:text-sm md:text-sm lg:text-[14] xl:text-[14] hover:text-yellow-500 flex items-center"
+              >
+                Wine Pairing <span class="ml-2 text-xl">&#9662;</span>
+              </a>
+              <ul
+                class="absolute hidden group-hover:block text-white mt-2 rounded w-96 p-4 p-6 pb-10"
+              >
+                <li>
+                  <a
+                    href="/search_wine.html"
+                    id="pair-wine-variety"
+                    class="block px-4 py-4 sm:text-sm md:text-sm lg:text-[14] xl:text-[14] hover:underline hover:text-yellow-500 rounded-md"
+                    >Pair by wine variety</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/search_wine.html"
+                    id="pair-wine-food"
+                    class="block px-6 py-4 sm:text-sm md:text-sm lg:text-[14] xl:text-[14] hover:underline hover:text-yellow-500 rounded-md"
+                    >Pair by food</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/wineform.html"
+                    id="open-quiz"
+                    class="block px-6 py-4 sm:text-sm md:text-sm lg:text-[14] xl:text-[14] hover:underline hover:text-yellow-500 rounded-md"
+                    >Take the wine quiz</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <!-- Beer Pairing -->
+            <li class="relative group">
+              <a
+                href="#"
+                class="sm:text-sm md:text-sm lg:text-[14] xl:text-[14] hover:text-yellow-500 flex items-center"
+              >
+                Beer Pairing <span class="ml-2 text-xl">&#9662;</span>
+              </a>
+              <ul
+                class="absolute hidden group-hover:block text-white mt-2 rounded w-96 p-6 pb-10"
+              >
+                <li>
+                  <a
+                    href="/search_beer.html"
+                    id="pair-beer-variety"
+                    class="block px-6 py-4 sm:text-sm md:text-sm lg:text-[14] xl:text-[14] hover:underline hover:text-yellow-500 rounded-md"
+                    >Pair by beer variety</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/search_beer.html"
+                    id="pair-beer-food"
+                    class="block px-6 py-4 sm:text-sm md:text-sm lg:text-[14] xl:text-[14] hover:underline hover:text-yellow-500 rounded-md"
+                    >Pair by food</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/beerform.html"
+                    class="block px-6 py-4 sm:text-sm md:text-sm lg:text-[14] xl:text-[14] hover:underline hover:text-yellow-500rounded-md"
+                    >Take the beer quiz</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <!-- Buttons -->
+          <div class="flex flex-wrap justify-center sm:justify-start gap-4">
+            <a href="/login.html">
+              <button
+                class="login-button lg:w-28 h-8 px-2 rounded border-[4px] border-transparent transition-all duration-300 sm:text-sm md:text-sm lg:text-[14] xl:text-[14]"
+              >
+                Log In
+              </button></a
+            >
+            <a href="/signup.html"
+              ><button
+                id="signup-button"
+                class="signup-button bg-[#581448] text-white lg:w-28 h-8 px-2 rounded border-[2px] border-transparent transition-all duration-300 text-sm sm:text-[14px]"
+              >
+                Sign Up
+              </button></a
+            >
+          </div>
+        </div>
+      </nav>
+    </header>
 
     <!-- Form 1 -->
 
@@ -53,57 +233,68 @@
               </p>
               <p class="text-lg font-bold mb-4 mt-10">
                 Wine lovers: What kind of wine do you prefer?
+                <span class="font-regular text-[12px]"
+                  >Please select one in each category</span
+                >
               </p>
             </div>
+            <div class="flex justify-center gap-6">
+              <label class="wine-card">
+                <input type="radio" name="wine" class="hidden" />
+                <div class="wine-content">
+                  <img
+                    src="/images/rose3.jpg"
+                    alt="Rosé Wine"
+                    class="wine-img"
+                  />
+                  <p class="wine-text">Rosé Wine – Light and fruity</p>
+                </div>
+              </label>
 
-            <div class="flex flex-wrap gap-4 justify-center mb-10 mt-10">
-              <img
-                src="/images/rose_wine.jpg"
-                alt="rose"
-                class="wine-img random-offset"
-              />
+              <label class="wine-card">
+                <input type="radio" name="wine" class="hidden" />
+                <div class="wine-content">
+                  <img
+                    src="/images/white_wine.jpeg"
+                    alt="White Wine"
+                    class="wine-img"
+                  />
+                  <p class="wine-text">White Wine – Crisp and fresh.</p>
+                </div>
+              </label>
 
-              <img
-                src="/images/white_wine.jpeg"
-                alt="white"
-                class="wine-img random-offset"
-              />
-              <img
-                src="/images/red_wine.jpg"
-                alt="red"
-                class="wine-img random-offset"
-              />
-              <img
-                src="/images/sparkling-wine.jpg"
-                alt="prosecco"
-                class="wine-img random-offset"
-              />
-            </div>
-            <div class="flex flex-col gap-4">
-              <label class="wine-option">
-                <input type="radio" name="wine-preference" value="rose" />
-                <span> Rosé Wine – Light and fruity</span>
+              <label class="wine-card">
+                <input type="radio" name="wine" class="hidden" />
+                <div class="wine-content">
+                  <img
+                    src="/images/red_wine.jpg"
+                    alt="Red Wine"
+                    class="wine-img"
+                  />
+                  <p class="wine-text">Red Wine – Rich and bold flavors.</p>
+                </div>
               </label>
-              <label class="wine-option">
-                <input type="radio" name="wine-preference" value="white" />
-                <span>White Wine – Crisp and fresh.</span>
-              </label>
-              <label class="wine-option">
-                <input type="radio" name="wine-preference" value="red" />
-                <span> Red Wine – Rich and bold flavors.</span>
-              </label>
-              <label class="wine-option">
-                <input type="radio" name="wine-preference" value="Sparkling" />
-                <span>Sparkling Wine – Bubbly and festive.</span>
+
+              <label class="wine-card">
+                <input type="radio" name="wine" class="hidden" />
+                <div class="wine-content">
+                  <img
+                    src="/images/sparkling-wine.jpg"
+                    alt="Sparkling Wine"
+                    class="wine-img"
+                  />
+                  <p class="wine-text">Sparkling Wine – Bubbly and festive.</p>
+                </div>
               </label>
             </div>
 
             <hr class="border-t-4 border-[#BDA522] my-32 mb-8 mt-8" />
-            <!-- Qs 2 y 3 -->
+            <!-- Qs 2  -->
             <div class="question" id="question2">
-              <h2 class="text-lg font-bold mb-4">
+              <p class="text-lg font-bold mb-4">
                 Do you like your drink to be sweet or dry?
-              </h2>
+              </p>
+
               <div class="flex flex-col gap-4">
                 <label class="wine-option">
                   <input
@@ -149,10 +340,12 @@
             </div>
 
             <hr class="border-t-4 border-[#DABF21] my-8 mb-8" />
+
+            <!-- Qs  3 -->
             <div class="question" id="question3">
-              <h2 class="text-lg font-bold mb-4">
+              <p class="text-lg font-bold mb-4">
                 What flavors do you enjoy the most?
-              </h2>
+              </p>
               <div class="flex flex-col gap-4">
                 <label class="wine-option">
                   <input type="radio" name="wine-flavor" value="fruity" />
@@ -198,9 +391,9 @@
 
             <!-- Qs 4 -->
             <div class="question" id="question4">
-              <h2 class="h2-q1 text-lg font-bold mb-14 mt-10">
+              <p class="h2-q1 text-lg font-bold mb-14 mt-10">
                 What kind of food are you planning to pair it with?
-              </h2>
+              </p>
               <div class="flex flex-wrap gap-4 justify-center mb-12 mt-4">
                 <img src="/images/cheesse.jpg" class="food-img random-offset" />
                 <img
@@ -272,6 +465,117 @@
         </div>
       </div>
     </main>
+
+    <footer class="relative bg-black text-white py-6 mt-20 w-full">
+      <div
+        class="absolute -top-1 left-1/2 transform -translate-x-1/2 flex items-center w-full"
+      >
+        <div class="w-full h-1 bg-yellow-400"></div>
+        <button
+          id="openModal"
+          class="bg-yellow-500 text-white px-4 py-2 rounded-lg shadow-lg absolute left-1/2 transform -translate-x-1/2"
+        >
+          Write to us
+        </button>
+      </div>
+
+      <!-- Footer content -->
+      <div
+        class="w-full px-6 flex flex-col md:flex-row justify-between items-start md:items-center mt-6"
+      >
+        <div class="text-center md:text-left space-y-2 ml-14 md:mb-0">
+          <a href="#" class="block hover:text-yellow-500">About Us</a>
+          <a href="#" class="block hover:text-yellow-500">Our Company</a>
+          <a href="#" class="block hover:text-yellow-500">FAQ</a>
+        </div>
+
+        <div class="text-center my-4 md:my-0">
+          <a href="index.html"
+            ><img
+              src="/images/pair my reduce in black bg.png"
+              alt="PairMyDrink Logo"
+              class="mx-auto w-[230px]"
+          /></a>
+          <p class="text-xs mt-2">
+            &copy; 2025 | Designed & Developed by Victoria Sani.
+          </p>
+        </div>
+
+        <div class="space-y-2 text-left mr-14">
+          <a href="/signup.html" class="block hover:text-yellow-500">Sign up</a>
+          <a href="#" id="openLoginFooter" class="block hover:text-yellow-500"
+            >Blog Wine</a
+          >
+          <a href="#" class="block hover:text-yellow-500">Blog Beer</a>
+          <a href="#" class="block text-xs hover:text-yellow-500"
+            >PRIVACY POLICY</a
+          >
+        </div>
+      </div>
+    </footer>
+    <!-- Contact Form Modal -->
+    <div
+      id="contactModal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden z-50"
+    >
+      <div class="bg-white p-6 rounded-lg shadow-lg w-[450px]">
+        <h2 class="text-xl font-bold mb-4">Contact Us</h2>
+        <form id="contactForm">
+          <div class="mb-4">
+            <label class="block text-sm font-medium">Name</label>
+            <input type="text" class="w-full p-2 border rounded" required />
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-sm font-medium">Email</label>
+            <input type="email" class="w-full p-2 border rounded" required />
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-sm font-medium">Message</label>
+            <textarea
+              class="w-full p-2 border rounded"
+              rows="4"
+              required
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="block mx-auto bg-yellow-500 text-white px-16 py-2 rounded hover:opacity-85"
+          >
+            Send
+          </button>
+        </form>
+        <button id="closeContactModal" class="mt-4 text-red-500">Close</button>
+      </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div
+      id="successModal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden z-50"
+    >
+      <div class="bg-white p-6 rounded-lg shadow-lg w-[350px] text-center">
+        <img
+          src="/images/zan-lazarevic-WrueFKpTlQs-unsplash.jpg"
+          alt="thanks"
+          class="w-25 h-25 mx-auto mb-2"
+        />
+        <h2 class="text-xl font-bold text-green-600">
+          Message Sent Successfully! ✅
+        </h2>
+        <p class="mt-2">
+          Thank you for reaching out. We'll get back to you soon.
+        </p>
+        <button
+          id="closeSuccessModal"
+          class="mt-4 bg-yellow-500 text-white px-4 py-2 rounded-lg"
+        >
+          OK
+        </button>
+      </div>
+    </div>
     <script src="/javascript/index.js"></script>
   </body>
 </html>

@@ -114,7 +114,7 @@ if (slider) {
     }
   }
 
-  setInterval(nextSlide, 3000);
+  setInterval(nextSlide, 2700);
 } else {
   console.warn("The slider did not find the DOM");
 }
@@ -191,122 +191,29 @@ async function fetchData(url) {
 }
 
 // ------------------ Endpoints de la API ------------------
-// Dish Pairing for Win
 async function getDishPairing(wine) {
   const formattedWine = formatWineName(wine);
   const url = `${BASE_URL}/dishes?wine=${formattedWine}&apiKey=${API_KEY}`;
   return await fetchData(url);
 }
 
-// Wine Pairing
 async function getWinePairing(food) {
   const formattedFood = formatWineName(food);
   const url = `${BASE_URL}/pairing?food=${formattedFood}&apiKey=${API_KEY}`;
   return await fetchData(url);
 }
 
-// Wine Description
 async function getWineDescription(wine) {
   const formattedWine = formatWineName(wine);
   const url = `${BASE_URL}/description?wine=${formattedWine}&apiKey=${API_KEY}`;
   return await fetchData(url);
 }
 
-// Wine Recommendation
 async function getWineRecommendation(wine) {
   const formattedWine = formatWineName(wine);
   const url = `${BASE_URL}/recommendation?wine=${formattedWine}&number=5&apiKey=${API_KEY}`;
   return await fetchData(url);
 }
-
-// --- Wine Guide ---
-
-const validWines = [
-  "assyrtiko",
-  "pinot blanc",
-  "cortese",
-  "roussanne",
-  "moschofilero",
-  "muscadet",
-  "viognier",
-  "verdicchio",
-  "greco",
-  "marsanne",
-  "white burgundy",
-  "chardonnay",
-  "gruener veltliner",
-  "white rioja",
-  "frascati",
-  "gavi",
-  "trebbiano",
-  "sauvignon blanc",
-  "catarratto",
-  "albarino",
-  "arneis",
-  "verdejo",
-  "vermentino",
-  "soave",
-  "pinot grigio",
-  "dry riesling",
-  "torrontes",
-  "gewurztraminer",
-  "chenin blanc",
-  "white bordeaux",
-  "semillon",
-  "riesling",
-  "sauternes",
-  "petite sirah",
-  "zweigelt",
-  "baco noir",
-  "bonarda",
-  "cabernet franc",
-  "barbera wine",
-  "primitivo",
-  "pinot noir",
-  "nebbiolo",
-  "dolcetto",
-  "tannat",
-  "negroamaro",
-  "red burgundy",
-  "rioja",
-  "cotes du rhone",
-  "grenache",
-  "malbec",
-  "zinfandel",
-  "sangiovese",
-  "carignan",
-  "carmenere",
-  "cesanese",
-  "cabernet sauvignon",
-  "aglianico",
-  "tempranillo",
-  "shiraz",
-  "mourvedre",
-  "merlot",
-  "nero d avola",
-  "bordeaux",
-  "port",
-  "gamay",
-  "dornfelder",
-  "concord wine",
-  "sparkling red wine",
-  "pinotage",
-  "agiorgitiko",
-  "moscato",
-  "late harvest",
-  "ice wine",
-  "white port",
-  "madeira",
-  "vin santo",
-  "champagne",
-  "prosecco",
-  "spumante",
-  "sparkling rose",
-  "sherry",
-  "dry vermouth",
-  "fruit wine",
-  "mead",
-];
 
 // ------------------ handleSearch ------------------
 async function handleSearch() {
@@ -321,113 +228,78 @@ async function handleSearch() {
     .map((v) => formatWineName(v))
     .includes(formattedInput);
 
+  const resultContainer = document.getElementById("result-container");
+  resultContainer.innerHTML = ""; // Limpiar antes de mostrar resultados
+
   if (isWine) {
-    // API calls
+    // --- Buscar información sobre el vino ---
     const descriptionData = await getWineDescription(searchInput);
     const dishPairingData = await getDishPairing(searchInput);
     const recommendationData = await getWineRecommendation(searchInput);
 
-    // --- Wine Description ---
-    const capitalizedWine = searchInput.replace(/\b\w/g, (char) =>
-      char.toUpperCase()
-    );
-    const wineDescriptionTitle = `<h3 class="text-lg font-bold mb-2">Wine Description</h3>`;
-    const wineDescriptionContent = descriptionData?.wineDescription
-      ? `<p><strong>${capitalizedWine}</strong> – ${descriptionData.wineDescription}</p>`
-      : "<p>No wine description found.</p>";
-    document.getElementById("wineDescription").innerHTML =
-      wineDescriptionTitle + wineDescriptionContent;
+    // --- Construir HTML para mostrar resultados ---
+    let resultHTML = `<div class="p-4 bg-white shadow-lg rounded-lg mt-4">
+      <h2 class="text-xl font-bold text-gray-800">Wine Description</h2>
+      <p class="text-gray-600 mt-2">${
+        descriptionData?.wineDescription || "No description available."
+      }</p>
+    </div>`;
 
-    // --- Dish Pairing ---
-    let pairingHTML = `<h3 class="text-lg font-bold mb-2">Dish Pairing</h3>`;
     if (dishPairingData?.pairings?.length) {
-      const dishList = dishPairingData.pairings
-        .map((dish) => `<li>${dish}</li>`)
-        .join("");
-      pairingHTML += `<ul class="list-disc list-inside">${dishList}</ul>`;
-    } else {
-      pairingHTML += "<p>No dish pairing available for this wine.</p>";
+      resultHTML += `<div class="p-4 bg-gray-100 shadow-md rounded-lg mt-4">
+        <h3 class="text-lg font-semibold text-gray-900">Dish Pairing</h3>
+        <ul class="list-disc list-inside">${dishPairingData.pairings
+          .map((dish) => `<li>${dish}</li>`)
+          .join("")}</ul>
+      </div>`;
     }
-    document.getElementById("foodPairing").innerHTML = pairingHTML;
 
-    // --- Recommendations ---
-    const recommendationTitle = `<h3 class="text-lg font-bold mb-2">Recommendation</h3>`;
     if (recommendationData?.recommendedWines?.length) {
-      const recommendedWines = recommendationData.recommendedWines.slice(0, 3);
-      const winesHTML = recommendedWines
-        .map((wine) => {
-          let price = wine.price
-            ? `€${(
-                parseFloat(wine.price.replace(/[$€]/g, "").trim()) * 0.92
-              ).toFixed(2)}`
-            : "No price available";
-          const link = wine.link
-            ? `<p><a href="${wine.link}" target="_blank" class="text-purple-600 underline">Buy here</a></p>`
-            : "";
-          return `<div class="mb-4"><p>${wine.title} – ${price}</p>${link}</div>`;
-        })
-        .join("");
-      document.getElementById("wineRecommendations").innerHTML =
-        recommendationTitle + `<div class="text-left">${winesHTML}</div>`;
-    } else {
-      document.getElementById("wineRecommendations").innerHTML =
-        recommendationTitle +
-        "<p>No recommendations available for this wine.</p>";
+      resultHTML += `<div class="p-4 bg-white shadow-md rounded-lg mt-4">
+        <h3 class="text-lg font-semibold text-gray-900">Recommendations</h3>`;
+      recommendationData.recommendedWines.slice(0, 3).forEach((wine) => {
+        let price = wine.price
+          ? `€${(
+              parseFloat(wine.price.replace(/[$€]/g, "").trim()) * 0.92
+            ).toFixed(2)}`
+          : "No price available";
+        let link = wine.link
+          ? `<p><a href="${wine.link}" target="_blank" class="text-purple-600 underline">Buy here</a></p>`
+          : "";
+        resultHTML += `<div class="mb-4"><p>${wine.title} – ${price}</p>${link}</div>`;
+      });
+      resultHTML += `</div>`;
     }
+
+    resultContainer.innerHTML = resultHTML;
   } else {
-    // ---------------- Food Pairing Section ----------------
+    // --- Buscar maridaje para comida ---
     const pairingData = await getWinePairing(searchInput);
-    const maxWines = 3;
+    let pairingHTML = `<div class="p-4 bg-white shadow-lg rounded-lg mt-4">
+      <h2 class="text-xl font-bold text-gray-800">Wine Pairing</h2>
+      <p class="text-gray-600 mt-2">${
+        pairingData?.pairingText || "No pairing available."
+      }</p>
+    </div>`;
 
     if (pairingData?.productMatches?.length) {
-      const firstWine = pairingData.productMatches[0];
-      const wineType = firstWine.title.split(" ").slice(-1)[0];
-
-      document.getElementById(
-        "wineDescription"
-      ).innerHTML = `<h3 class="text-lg font-bold mb-2">${wineType}</h3>`;
-    } else {
-      document.getElementById("wineDescription").innerHTML =
-        "<h3 class='text-lg font-bold mb-2'>Wine Type</h3><p>No valid wine type available.</p>";
+      pairingData.productMatches.slice(0, 3).forEach((match) => {
+        let price = match.price
+          ? `€${(
+              parseFloat(match.price.replace(/[$€]/g, "").trim()) * 0.92
+            ).toFixed(2)}`
+          : "No price available";
+        pairingHTML += `<div class="p-4 bg-gray-100 shadow-md rounded-lg mt-4">
+          <h3 class="text-lg font-semibold text-gray-900">${match.title}</h3>
+          <p class="text-gray-700">${
+            match.description || "No description available"
+          }</p>
+          <p class="font-bold text-indigo-600">Price: ${price}</p>
+        </div>`;
+      });
     }
 
-    // --- Wine Pairing ---
-    document.getElementById("foodPairing").innerHTML =
-      `<h3 class="text-lg font-bold mb-2">Wine Pairing</h3>` +
-      (pairingData?.pairingText
-        ? `<p>${pairingData.pairingText}</p>`
-        : "<p>No pairing available for the food mentioned.</p>");
-
-    // --- Wine Description ---
-    document.getElementById("wineDescription").innerHTML +=
-      `<h3 class="text-lg font-bold mb-2">Wine Description</h3>` +
-      (pairingData?.productMatches?.length
-        ? pairingData.productMatches
-            .map(
-              (match) =>
-                `<p><strong>${match.title}</strong>: ${
-                  match.description || "No description available"
-                }</p>`
-            )
-            .join("")
-        : "<p>No valid description available for the recommended wine.</p>");
-
-    // --- Recommendations ---
-    document.getElementById("wineRecommendations").innerHTML =
-      `<h3 class="text-lg font-bold mb-2">Recommendation</h3>` +
-      (pairingData?.productMatches?.length
-        ? pairingData.productMatches
-            .slice(0, maxWines)
-            .map((match) => {
-              let price = match.price
-                ? `€${(
-                    parseFloat(match.price.replace(/[$€]/g, "").trim()) * 0.92
-                  ).toFixed(2)}`
-                : "No price available";
-              return `<p>${match.title} - ${price}</p>`;
-            })
-            .join("")
-        : "<p>No recommendations available for the food mentioned.</p>");
+    resultContainer.innerHTML = pairingHTML;
   }
 }
 
