@@ -145,9 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //**Clean forms radio option */
-
 window.addEventListener("load", function () {
-  // Selecciona todos los inputs de tipo radio en todos los formularios
   const radios = document.querySelectorAll('form input[type="radio"]');
   radios.forEach((radio) => {
     radio.checked = false; // Desmarca cada radio button
@@ -175,10 +173,99 @@ const BASE_URL = "https://api.spoonacular.com/food/wine";
 
 console.log("index.js API loaded");
 
+const validWines = [
+  "assyrtiko",
+  "pinot blanc",
+  "cortese",
+  "roussanne",
+  "moschofilero",
+  "muscadet",
+  "viognier",
+  "verdicchio",
+  "greco",
+  "marsanne",
+  "white burgundy",
+  "chardonnay",
+  "gruener veltliner",
+  "white rioja",
+  "frascati",
+  "gavi",
+  "trebbiano",
+  "sauvignon blanc",
+  "catarratto",
+  "albarino",
+  "arneis",
+  "verdejo",
+  "vermentino",
+  "soave",
+  "pinot grigio",
+  "dry riesling",
+  "torrontes",
+  "gewurztraminer",
+  "chenin blanc",
+  "white bordeaux",
+  "semillon",
+  "riesling",
+  "sauternes",
+  "petite sirah",
+  "zweigelt",
+  "baco noir",
+  "bonarda",
+  "cabernet franc",
+  "barbera wine",
+  "primitivo",
+  "pinot noir",
+  "nebbiolo",
+  "dolcetto",
+  "tannat",
+  "negroamaro",
+  "red burgundy",
+  "rioja",
+  "cotes du rhone",
+  "grenache",
+  "malbec",
+  "zinfandel",
+  "sangiovese",
+  "carignan",
+  "carmenere",
+  "cesanese",
+  "cabernet sauvignon",
+  "aglianico",
+  "tempranillo",
+  "shiraz",
+  "mourvedre",
+  "merlot",
+  "nero d avola",
+  "bordeaux",
+  "port",
+  "gamay",
+  "dornfelder",
+  "concord wine",
+  "sparkling red wine",
+  "pinotage",
+  "agiorgitiko",
+  "moscato",
+  "late harvest",
+  "ice wine",
+  "white port",
+  "madeira",
+  "vin santo",
+  "champagne",
+  "prosecco",
+  "spumante",
+  "sparkling rose",
+  "sherry",
+  "dry vermouth",
+  "fruit wine",
+  "mead",
+];
+
+// Función para formatear el nombre de búsqueda
 function formatWineName(name) {
   return name.toLowerCase().replace(/\s+/g, "_");
 }
 
+// Función genérica para hacer fetch a la API
 async function fetchData(url) {
   try {
     const response = await fetch(url);
@@ -190,54 +277,70 @@ async function fetchData(url) {
   }
 }
 
-// ------------------ Endpoints de la API ------------------
+// Endpoints de la API
 async function getDishPairing(wine) {
-  const formattedWine = formatWineName(wine);
-  const url = `${BASE_URL}/dishes?wine=${formattedWine}&apiKey=${API_KEY}`;
+  const url = `${BASE_URL}/dishes?wine=${formatWineName(
+    wine
+  )}&apiKey=${API_KEY}`;
   return await fetchData(url);
 }
 
 async function getWinePairing(food) {
-  const formattedFood = formatWineName(food);
-  const url = `${BASE_URL}/pairing?food=${formattedFood}&apiKey=${API_KEY}`;
+  const url = `${BASE_URL}/pairing?food=${formatWineName(
+    food
+  )}&apiKey=${API_KEY}`;
   return await fetchData(url);
 }
 
 async function getWineDescription(wine) {
-  const formattedWine = formatWineName(wine);
-  const url = `${BASE_URL}/description?wine=${formattedWine}&apiKey=${API_KEY}`;
+  const url = `${BASE_URL}/description?wine=${formatWineName(
+    wine
+  )}&apiKey=${API_KEY}`;
   return await fetchData(url);
 }
 
 async function getWineRecommendation(wine) {
-  const formattedWine = formatWineName(wine);
-  const url = `${BASE_URL}/recommendation?wine=${formattedWine}&number=5&apiKey=${API_KEY}`;
+  const url = `${BASE_URL}/recommendation?wine=${formatWineName(
+    wine
+  )}&number=5&apiKey=${API_KEY}`;
   return await fetchData(url);
 }
 
-// ------------------ handleSearch ------------------
+// **HANDLE SEARCH**
 async function handleSearch() {
   const searchInput = document.getElementById("clearInput").value.trim();
+  const resultContainer = document.getElementById("result-container");
+
+  console.log("Search input:", searchInput);
+
   if (!searchInput) {
     alert("Please enter a wine or food.");
     return;
   }
 
-  const formattedInput = formatWineName(searchInput);
-  const isWine = validWines
-    .map((v) => formatWineName(v))
-    .includes(formattedInput);
+  if (!resultContainer) {
+    console.error("Error: Result container not found");
+    return;
+  }
 
-  const resultContainer = document.getElementById("result-container");
-  resultContainer.innerHTML = ""; // Limpiar antes de mostrar resultados
+  resultContainer.innerHTML = `<p class="text-gray-600">Loading results...</p>`;
+
+  const formattedInput = formatWineName(searchInput);
+  const isWine = validWines.includes(formattedInput);
+
+  console.log("Is wine:", isWine);
 
   if (isWine) {
     // --- Buscar información sobre el vino ---
-    const descriptionData = await getWineDescription(searchInput);
-    const dishPairingData = await getDishPairing(searchInput);
-    const recommendationData = await getWineRecommendation(searchInput);
+    const [descriptionData, dishPairingData, recommendationData] =
+      await Promise.all([
+        getWineDescription(searchInput),
+        getDishPairing(searchInput),
+        getWineRecommendation(searchInput),
+      ]);
 
-    // --- Construir HTML para mostrar resultados ---
+    console.log({ descriptionData, dishPairingData, recommendationData });
+
     let resultHTML = `<div class="p-4 bg-white shadow-lg rounded-lg mt-4">
       <h2 class="text-xl font-bold text-gray-800">Wine Description</h2>
       <p class="text-gray-600 mt-2">${
@@ -275,6 +378,9 @@ async function handleSearch() {
   } else {
     // --- Buscar maridaje para comida ---
     const pairingData = await getWinePairing(searchInput);
+
+    console.log({ pairingData });
+
     let pairingHTML = `<div class="p-4 bg-white shadow-lg rounded-lg mt-4">
       <h2 class="text-xl font-bold text-gray-800">Wine Pairing</h2>
       <p class="text-gray-600 mt-2">${
