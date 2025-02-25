@@ -341,7 +341,7 @@ async function handleSearch() {
 
     console.log({ descriptionData, dishPairingData, recommendationData });
 
-    let resultHTML = `<div class="p-4 bg-white shadow-lg rounded-lg mt-4">
+    let resultHTML = `<div class="p-4 bg-white shadow-lg rounded-lg mt-1 mb-2">
       <h2 class="text-xl font-bold text-gray-800">Wine Description</h2>
       <p class="text-gray-600 mt-2">${
         descriptionData?.wineDescription || "No description available."
@@ -349,7 +349,7 @@ async function handleSearch() {
     </div>`;
 
     if (dishPairingData?.pairings?.length) {
-      resultHTML += `<div class="p-4 bg-gray-100 shadow-md rounded-lg mt-4">
+      resultHTML += `<div class="p-4 bg-gray-100 shadow-md rounded-lg mt-2">
         <h3 class="text-lg font-semibold text-gray-900">Dish Pairing</h3>
         <ul class="list-disc list-inside">${dishPairingData.pairings
           .map((dish) => `<li>${dish}</li>`)
@@ -358,7 +358,7 @@ async function handleSearch() {
     }
 
     if (recommendationData?.recommendedWines?.length) {
-      resultHTML += `<div class="p-4 bg-white shadow-md rounded-lg mt-4">
+      resultHTML += `<div class="p-4 bg-white shadow-md rounded-lg mt-2 mb-4>
         <h3 class="text-lg font-semibold text-gray-900">Recommendations</h3>`;
       recommendationData.recommendedWines.slice(0, 3).forEach((wine) => {
         let price = wine.price
@@ -381,7 +381,7 @@ async function handleSearch() {
 
     console.log({ pairingData });
 
-    let pairingHTML = `<div class="p-4 bg-white shadow-lg rounded-lg mt-4">
+    let pairingHTML = `<div class="p-4 bg-white shadow-lg rounded-lg mt-2 mb-2">
       <h2 class="text-xl font-bold text-gray-800">Wine Pairing</h2>
       <p class="text-gray-600 mt-2">${
         pairingData?.pairingText || "No pairing available."
@@ -395,7 +395,7 @@ async function handleSearch() {
               parseFloat(match.price.replace(/[$€]/g, "").trim()) * 0.92
             ).toFixed(2)}`
           : "No price available";
-        pairingHTML += `<div class="p-4 bg-gray-100 shadow-md rounded-lg mt-4">
+        pairingHTML += `<div class="p-4 bg-gray-100 shadow-md rounded-lg mt-2">
           <h3 class="text-lg font-semibold text-gray-900">${match.title}</h3>
           <p class="text-gray-700">${
             match.description || "No description available"
