@@ -224,56 +224,72 @@
               What type of beer do you prefer?
             </p>
 
-            <div class="dropdown-beer">
-              <label for="beer-option" class="beer-text"
-                >Select one option:</label
+            <div class="question mb-8" id="question1">
+              <h2
+                class="text-gray-600 mb-4 text-center mt-4 text-lg sm:text-md lg:text-lg xl:text-xl"
               >
-              <select name="drop" id="beer-type">
-                <option value="" disabled selected>Select your beer:</option>
-                <option value="lager">
-                  Lager: Crisp, refreshing, light-bodied.
-                </option>
-                <option value="ipa">
-                  IPA: Bold, hoppy, and strong bitterness.
-                </option>
-                <option value="stout">
-                  Stout: Dark, rich, with coffee or chocolate flavors.
-                </option>
-                <option value="pilsner">
-                  Pilsner: Crisp, dry, with a light bitterness.
-                </option>
-                <option value="bock">
-                  Bock: Strong, malty, with caramel and dark fruit notes.
-                </option>
-                <option value="porter">
-                  Porter: Dark, smooth, with chocolate and caramel notes.
-                </option>
-                <option value="blonde">
-                  Blonde Ale: Light, smooth, with a subtle malt flavor.
-                </option>
-                <option value="wheat">
-                  Wheat Beer: Smooth, cloudy, with hints of banana and clove.
-                </option>
-                <option value="amber">
-                  Amber Ale: Balanced, malty, with caramel flavor.
-                </option>
-                <option value="tripel">
-                  Belgian Tripel: Strong, spicy, with fruity notes Belgian
-                  Tripel.
-                </option>
-                <option value="dubbel">
-                  Belgian Dubbel: Strong, spicy, with fruity notes Belgian
-                  Tripel
-                </option>
-                <option value="gose">
-                  Gose: Tart, salty, with citrus note.
-                </option>
-                <option value="barleywine">
-                  Barley Wine: Strong, malty, with intense caramel and fruit
-                  notes.
-                </option>
-                <option value="surprise">Just surprise me!</option>
-              </select>
+                There are many styles of wine, each with its own unique flavor
+                profile.
+              </h2>
+              <p
+                class="text-lg sm:text-md lg:text-lg xl:text-lg font-bold mb-4 mt-10"
+              >
+                Wine lovers: What kind of wine do you prefer?
+                <span class="font-regular text-[12px]"
+                  >Please select one in each category</span
+                >
+              </p>
+            </div>
+            <div
+              class="flex flex-col md:flex-row justify-center gap-4 md:gap-6"
+            >
+              <label class="wine-card">
+                <input type="radio" name="wine" class="hidden" />
+                <div class="wine-content">
+                  <img
+                    src="/images/light-beer.png"
+                    alt="Light"
+                    class="wine-img w-18 h-20"
+                  />
+                  <p class="wine-text">Light Gold Color Beers</p>
+                </div>
+              </label>
+
+              <label class="wine-card">
+                <input type="radio" name="wine" class="hidden" />
+                <div class="wine-content">
+                  <img
+                    src="/images/dark-ale.jpg"
+                    alt="dark Ale"
+                    class="wine-img w-16 h-20"
+                  />
+                  <p class="wine-text">Medium Deep Gold, Red Beers</p>
+                </div>
+              </label>
+
+              <label class="wine-card">
+                <input type="radio" name="wine" class="hidden" />
+                <div class="wine-content">
+                  <img
+                    src="/images/brown-beer.png"
+                    alt="Heavy Dark"
+                    class="wine-img w-14 h-20"
+                  />
+                  <p class="wine-text">Heavy Dark Brown Beers</p>
+                </div>
+              </label>
+
+              <label class="wine-card">
+                <input type="radio" name="wine" class="hidden" />
+                <div class="wine-content">
+                  <img
+                    src="/images/black-beer.jpg"
+                    alt="black beer"
+                    class="wine-img w-16 h-20"
+                  />
+                  <p class="wine-text">Red Wine – Rich and bold flavors.</p>
+                </div>
+              </label>
             </div>
           </div>
 
