@@ -325,8 +325,10 @@ async function handleSearch() {
 
   resultContainer.innerHTML = `<p class="text-gray-600">Loading results...</p>`;
 
-  const formattedInput = formatWineName(searchInput);
-  const isWine = validWines.includes(formattedInput);
+  const formattedInput = formatWineName(searchInput.toLowerCase());
+  const isWine = validWines.some(
+    (wine) => formatWineName(wine.toLowerCase()) === formattedInput
+  );
 
   console.log("Is wine:", isWine);
 
